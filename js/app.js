@@ -11,7 +11,8 @@ const TOTAL_PAGIN_BUTTONS = 6;
 function addPages() {                                                                          // pagination rendering
 
   let page = "";
-  const pagination_buttonsContainer = document.querySelector("pagination-buttonsContainer");
+  const paginator = document.querySelector(".pagination_buttons");
+  console.log(paginator);
 
   for (let i = currentPage; i <= currentPage + TOTAL_PAGIN_BUTTONS; i++) {                                        
 
@@ -22,30 +23,29 @@ function addPages() {                                                           
 
   }
   page = `<li id="prev_Page" ><<</li>${page}<li id="next_Page">>></li>`
-  pagination_buttonsContainer.innerHTML = page;
-  setActivePage(document.getElementById("page" + currentPage));
+  paginator.innerHTML = page;
+  setActivePage(document.getElementById("page" + currentPage), paginator);
 }
 
 
-const pagination_buttonsContainer = document.querySelector("pagination-buttonsContainer");
+  const paginator = document.querySelector(".pagination_buttons");
+  paginator.addEventListener("click", function (e){
 
-pagination_buttonsContainer.addEventListener("click", function (e){
-  let id = e.target.id;
-  id == "prev_Page"? currentPage -= 1 :
-  id == "next_Page"? currentPage += 1 :
-  currentPage = Number(id.substr(4));
-  addPages();
-  getCharacters();
-  window.scrollTo(0, 0);
+    let id = e.target.id;
+      id == "prev_Page"? currentPage -= 1 :
+      id == "next_Page"? currentPage += 1 :
+      currentPage = Number(id.substr(4));
+    addPages();
+    getCharacters();
+    window.scrollTo(0, 0);
 
   });
 
 
-  function setActivePage(element) {                                                             // set active the pagination button
-    const pagination_buttonsContainer = document.querySelector("pagination-buttonsContainer");
+  function setActivePage(element, paginator) {                                                             // set active the pagination button
+
     if(element) {
-      const paginator = document.querySelector("pagination-buttonsContainer");
-      pagination_buttonsContainer.forEach(li => li.classList.remove('active'));
+      paginator.childNodes.forEach(li => li.classList.remove('active'));
       element.className = "active";
     }
   }

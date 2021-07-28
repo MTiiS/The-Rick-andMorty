@@ -2,7 +2,7 @@ let characters = [];
 
 function getCharacters() {
   
-  let url  = "https://rickandmortyapi.com/api/character/?page=" + currentPage;  //получаем текущую страницу
+  let url  = "https://rickandmortyapi.com/api/character/?page=" + currentPage;       //url for api
   let xhr = new XMLHttpRequest();
 
   xhr.open('GET', url);
@@ -13,7 +13,7 @@ function getCharacters() {
       alert(`Ошибка ${xhr.status}: ${xhr.statusText}`); 
     } else { 
       characters = JSON.parse(xhr.response);
-      characters = characters.results.map(character => {      //создаем массив персонажей  
+      characters = characters.results.map(character => {                            
         return {
           image: character.image,
           name: character.name,
@@ -24,12 +24,11 @@ function getCharacters() {
         };
       });
      }
-    //getEpisode();
     addCards();
   }; 
 }
 
-function addCards() {    //создание карточки персонажа
+function addCards() {                                                               //creating character card
 
   let card = "";
 
@@ -48,18 +47,5 @@ function addCards() {    //создание карточки персонажа
   items.innerHTML = card;
 }
 
-/*  нужно реализовать получение имени эпизода где впервые встретился персонаж
-function getEpisode(){
-  for (character of characters) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', character.episode);
-    xhr.send();
-   xhr.onload = () => {
-     let episode = JSON.parse(xhr.response).name; 
-    }
-  }
-}*/
 
 getCharacters();
-
-

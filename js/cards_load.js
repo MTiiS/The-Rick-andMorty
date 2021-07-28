@@ -1,31 +1,31 @@
 let characters = [];
 
 function getCharacters() {
-  
-  let url  = "https://rickandmortyapi.com/api/character/?page=" + currentPage;       //url for api
-  let xhr = new XMLHttpRequest();
-
-  xhr.open('GET', url);
-  xhr.send();
-
-  xhr.onload = function() {
-    if (xhr.status != 200) { 
-      alert(`Ошибка ${xhr.status}: ${xhr.statusText}`); 
-    } else { 
-      characters = JSON.parse(xhr.response);
-      characters = characters.results.map(character => {                            
-        return {
-          image: character.image,
-          name: character.name,
-          status: character.status,
-          gender: character.gender,
-          location: character.location.name,
-          episode: character.episode[0]
+ 
+  let url  = "https://rickandmortyapi.com/api/character/?page=" + currentPage;
+  fetch(url)
+    .then(function (response) {
+      return response.json()
+      })
+    .then(function (data) {
+       characters =  data.results.map((character) => {      
+         return {
+           id: character.id ,
+           image: character.image,
+           name: character.name,
+           status: character.status,
+           gender: character.gender,
+           location: character.location.name,
+           episode: character.episode[0]
         };
-      });
-     }
-    addCards();
-  }; 
+    });
+
+      addCards();
+    })
+    .catch(function (error) {
+     console.log('error', error)
+  });
+
 }
 
 function addCards() {                                                               //creating character card

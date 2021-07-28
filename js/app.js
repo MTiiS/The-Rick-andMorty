@@ -11,7 +11,7 @@ const TOTAL_PAGIN_BUTTONS = 6;
 function addPages() {                                                                          // pagination rendering
 
   let page = "";
-  const paginator = document.querySelector(".pages");
+  const pagination_buttonsContainer = document.querySelector("pagination-buttonsContainer");
 
   for (let i = currentPage; i <= currentPage + TOTAL_PAGIN_BUTTONS; i++) {                                        
 
@@ -22,30 +22,30 @@ function addPages() {                                                           
 
   }
   page = `<li id="prev_Page" ><<</li>${page}<li id="next_Page">>></li>`
-  paginator.innerHTML = page;
+  pagination_buttonsContainer.innerHTML = page;
   setActivePage(document.getElementById("page" + currentPage));
 }
 
 
+const pagination_buttonsContainer = document.querySelector("pagination-buttonsContainer");
 
-  paginator.addEventListener("click", function (e){
-
-    let id = e.target.id;
-      id == "prev_Page"? currentPage -= 1 :
-      id == "next_Page"? currentPage += 1 :
-      currentPage = Number(id.substr(4));
-    addPages();
-    getCharacters();
-    window.scrollTo(0, 0);
+pagination_buttonsContainer.addEventListener("click", function (e){
+  let id = e.target.id;
+  id == "prev_Page"? currentPage -= 1 :
+  id == "next_Page"? currentPage += 1 :
+  currentPage = Number(id.substr(4));
+  addPages();
+  getCharacters();
+  window.scrollTo(0, 0);
 
   });
 
 
   function setActivePage(element) {                                                             // set active the pagination button
-
+    const pagination_buttonsContainer = document.querySelector("pagination-buttonsContainer");
     if(element) {
-      const paginator = document.querySelector(".pages");
-      paginator.childNodes.forEach(li => li.classList.remove('active'));
+      const paginator = document.querySelector("pagination-buttonsContainer");
+      pagination_buttonsContainer.forEach(li => li.classList.remove('active'));
       element.className = "active";
     }
   }

@@ -1,22 +1,24 @@
-let count = 671; //всего записей
-let cnt = 20; //сколько отображаем на странице
-let viewPages = Math.ceil(count / cnt);
-let currentPage = 1;  // по умолчанию загружаем первую страницу
-const paginator = document.querySelector(".pages");
+let totalCharacters = 671;                                                                     // total characters
+let charactersOnPage = 20;                                                                     // display 20 characters per page            
+let totalPages = Math.ceil(totalCharacters / charactersOnPage);                                // total number of pages
+let currentPage = 1;                                                                           // default start page
+const TOTAL_PAGIN_BUTTONS = 6;
 
 
 
+ 
 
-// 
+function addPages() {                                                                          // pagination rendering
 
-function addPages() {     //рендеринг пагинации
   let page = "";
-  for (let i = currentPage; i <= currentPage + 6; i++) {  // 
+  const paginator = document.querySelector(".pages");
 
-      currentPage == 1 ? page += "<li id=\"page" + (i) + "\">" + (i) + "</li>":
-      currentPage == 2 ? page += "<li id=\"page" + (i-1) + "\">" + (i-1) + "</li>":
-      currentPage == 3 ? page += "<li id=\"page" + (i-2) + "\">" + (i-2) + "</li>":
-      page += "<li id=\"page" + (i - 3) + "\">" + (i - 3) + "</li>";
+  for (let i = currentPage; i <= currentPage + TOTAL_PAGIN_BUTTONS; i++) {                                        
+
+      currentPage == 1 ? page += "<li id=\"page" + (i) + "\">" + (i) + "</li>":                // if (current page <= 3) start button always = 1
+      currentPage == 2 ? page += "<li id=\"page" + (i-1) + "\">" + (i-1) + "</li>":            // if (current page <= 3) start button always = 1
+      currentPage == 3 ? page += "<li id=\"page" + (i-2) + "\">" + (i-2) + "</li>":            // if (current page <= 3) start button always = 1
+      page += "<li id=\"page" + (i - 3) + "\">" + (i - 3) + "</li>";                           // if (current page > 3) start button = currentPage -i  (for 7 start button: 7-3 = 4, for 8 = 5 etc.) 
 
   }
   page = `<li id="prev_Page" ><<</li>${page}<li id="next_Page">>></li>`
@@ -27,6 +29,7 @@ function addPages() {     //рендеринг пагинации
 
 
   paginator.addEventListener("click", function (e){
+
     let id = e.target.id;
       id == "prev_Page"? currentPage -= 1 :
       id == "next_Page"? currentPage += 1 :
@@ -38,9 +41,10 @@ function addPages() {     //рендеринг пагинации
   });
 
 
-  function setActivePage(element) {  // установить активной кнопку пагинации
+  function setActivePage(element) {                                                             // set active the pagination button
+
     if(element) {
-      element
+      const paginator = document.querySelector(".pages");
       paginator.childNodes.forEach(li => li.classList.remove('active'));
       element.className = "active";
     }

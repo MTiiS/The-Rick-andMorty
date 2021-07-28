@@ -50,7 +50,7 @@ button {
 }
 
 
-.container-items {
+.cards {
 
    display: flex;
    flex-wrap: wrap;
@@ -59,7 +59,7 @@ button {
 }
 
 
-.list-items{
+.cards-item {
 
     width: 450px;
     height: 220px;
@@ -80,7 +80,7 @@ button {
  }
 
 
-.contentWrraper{
+.contentWrapper{
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -90,7 +90,7 @@ button {
 	
  
 }
-.contentWrraper section{
+.contentWrapper section{
 	box-sizing: border-box;
 	padding: 10px;
 	display: flex;
@@ -105,13 +105,13 @@ section h1, p, h4, ul{
 
  
 
-.container-pagination {
+.pagination_buttons {
     display: flex;
     justify-content: center;
     margin-bottom: 5px;
 }
 
-.container-pagination li {
+.pagination_buttons li {
     list-style-type: none;
     color: black;
     float: left;
@@ -119,12 +119,12 @@ section h1, p, h4, ul{
     text-decoration: none;
 }
 
-.container-pagination li.active {
+.pagination_buttons li.active {
     background-color: #494d55;
     color: white;
 }
 
-.container-pagination li:hover:not(.active) {background-color: #ddd;}
+.pagination_buttons li:hover:not(.active) {background-color: #ddd;}
 
 
 footer {

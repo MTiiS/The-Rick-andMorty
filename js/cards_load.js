@@ -33,9 +33,9 @@ function addCards() {                                                           
   let card = "";
 
   for (character of characters) {
-    card += `<div class="list-items">
+    card += `<div class="cards-item">
                <div class="imageWrapper"><img src="${character.image}" alt="${character.name}" > </div>	
-               <div class="contentWrraper">
+               <div class="contentWrapper">
                  <section><h1><span class="highlights">${character.name}</span></h1>  <ul><li class"red">${character.status} - ${character.gender}<ul></li></p> </section>
                  <section><h4><span class="highlights">Last known location:</span> ${character.location}</h4></section>   
                  <section><h4><span class="highlights">First seen in: </span></h4></section>
@@ -43,7 +43,7 @@ function addCards() {                                                           
              </div>`
 	}
   
-  let items = document.querySelector(".container-items");
+  let items = document.querySelector(".cards");
   items.innerHTML = card;
 }
 

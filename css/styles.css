@@ -11,12 +11,12 @@ html, body {
     height: 100%;
     font-family: "OtomanopeeOne-Regular";
     font-size: 14px;
-    margin: 0;
+    margin: 0px;
     background: #f9f9fb;
     color: #6c757d;
 }
 
-header {
+.header {
     background: #494d55;
     box-sizing: border-box;
     color: rgba(255, 255, 255, 0.85);
@@ -25,11 +25,11 @@ header {
     width: 100%;
 }
 
-h1 {
+.header__title {
     margin-top: 10px;
 }
 
-main {
+.main {
     margin: 0 auto;
     min-height: calc(100% - 106px);
     max-width: 90%;
@@ -43,7 +43,7 @@ main {
     justify-content: center;
 }
 
-.cards-item {
+.card {
     width: 450px;
     height: 220px;
     display: flex;
@@ -54,47 +54,48 @@ main {
     border: 1px solid black;
 }
 
-.imageWrapper img {
+.card__img {
     width: 220px;
     height: 220px;
-
 }
 
-.contentWrapper {
+.card__content {
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin: 0px;
     text-align: left;
     justify-content: space-evenly;
+    padding-left: 10px;
 }
 
-.highlights {
-    color: #eeeefa;
-}
-
-.contentWrapper section {
-    box-sizing: border-box;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-section h1, p, h4, ul {
+.card__element {
     margin: 0px;
 }
 
-section a {
+.card__content_highlights {
+    color: #eeeefa;
+
+}
+
+.card__link {
     color: rgba(255, 255, 255, 0.65);
     text-decoration: none;
 }
 
-.pagination_buttons {
+.pagination__buttons {
     display: flex;
     justify-content: center;
     margin-bottom: 5px;
 }
 
-.pagination_buttons li {
+.pagination__buttons :hover:not(.pagination__button_active) {
+    background-color: #ddd;
+}
+
+.pagination__button{
+    display: flex;
+    justify-content: center;
     list-style-type: none;
     color: black;
     float: left;
@@ -102,16 +103,12 @@ section a {
     text-decoration: none;
 }
 
-.pagination_buttons li.active {
+.pagination__button_active {
     background-color: #494d55;
     color: white;
 }
 
-.pagination_buttons li:hover:not(.active) {
-    background-color: #ddd;
-}
-
-footer {
+.footer {
     background: #343a40;
     padding: 5px;
     color: rgba(255, 255, 255, 0.6);

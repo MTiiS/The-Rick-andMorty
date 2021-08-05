@@ -1,27 +1,9 @@
-import {getCurrentPage, setCurrentPage, renderPage} from './app.js';
+import { getCurrentPage, switchToPage } from './model/currentPage';
+import { getConfig } from './model/config.js'
 
 let displayedPages = [];
+let handlePaginate = null;
 
-
-const CONFIG = {
-  TOTAL_PAGES: 34,
-  TOTAL_PAGIN_BUTTONS: 7,
-  OFFSET_STEP: 3,
-
-  PREV_BUTTON: {
-    id: "prev",
-    content: "<<"
-  },
-  NEXT_BUTTON: {
-    id: "next",
-    content: ">>"
-  }
-}
-
-function getConfig(name) {
-  if (name) return CONFIG[name];
-  return CONFIG;
-}
 
 function setDisplayedPages(pagesNumbers) {
   displayedPages = pagesNumbers;
@@ -37,10 +19,12 @@ function PaginationButton(id, text, isActive) {
   this.isActive = isActive;
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
+function init(config) {
   resreshDisplayedPages();
   renderPagination();
-});
+
+  handlePaginate = config.onPaginate;
+}
 
 export function resreshDisplayedPages() {
   //config
@@ -69,7 +53,7 @@ export function resreshDisplayedPages() {
   //add page buttons
   for (let i = firstButtonNumber - offsetStep; i < lastButtonNumber; i++) {
     let isActive = i === currentPage;
-    displayedPages.push( new PaginationButton(i, i, isActive) );
+    displayedPages.push(new PaginationButton(i, i, isActive));
   }
 
   //add navigation buttons
@@ -91,7 +75,6 @@ export function renderPagination() {
   }
 }
 
-
 function createPaginationButton(button) {
 
   let pagination__button = document.createElement('li');
@@ -105,35 +88,15 @@ function createPaginationButton(button) {
   return pagination__button;
 }
 
-function switchToPage(pageId) {
-  //config
-  let PREV_BUTTON = getConfig("PREV_BUTTON");
-  let NEXT_BUTTON = getConfig("NEXT_BUTTON");
-  let lastPage = getConfig("TOTAL_PAGES");
-  let currentPage = getCurrentPage();
-
-  switch (pageId) {
-    case PREV_BUTTON.id :
-      if (currentPage > 1) currentPage--;
-      break;
-    case NEXT_BUTTON.id:
-      if (currentPage < lastPage) currentPage++;
-      break;
-    default:
-      currentPage = Number(pageId);
-  }
-  setCurrentPage(currentPage);
-}
-
-
 document.querySelector(".pagination__buttons").addEventListener("click", function (e) {
 
   let pageId = e.target.dataset.page;
   switchToPage(pageId);
-
-  renderPage();
+  resreshDisplayedPages();
+  renderPagination();
+  handlePaginate();
   window.scrollTo(0, 0);
 
 })
 
-  
+export default init;

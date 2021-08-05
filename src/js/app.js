@@ -1,60 +1,27 @@
 import "../css/styles.css"
-import * as pagination from './pagination';
+import pagination from './pagination';
+import { getCurrentPage } from './model/currentPage.js'
+import { fetchCharacters } from './model/fetchData.js'
 
-let currentPage = 1;
-export let characters = {};
 
 document.addEventListener("DOMContentLoaded", function (event) {
   renderPage();
+  pagination({
+    onPaginate: function () {
+      renderPage();
+    }
+  });
 });
 
-export function renderPage() {
+function renderPage() {
   let currentPage = getCurrentPage();
   rendersCards(currentPage);
-  pagination.resreshDisplayedPages();
-  pagination.renderPagination();
 }
 
-export function getCharacters() {
-  return characters;
-}
-
-export function getCurrentPage() {
-  return currentPage;
-}
-
-export function setCurrentPage(pageNumber) {
-  currentPage = pageNumber;
-}
-
-function fetchCharacters(currentPage) {
-
-  let url = "https://rickandmortyapi.com/api/character/?page=" + currentPage;
-
-  return fetch(url)
-    .then( (response) => response.json() )
-    .then( (data) => {
-      return data.results.map((character) => {
-        //const { id, image, name, status, gender, location, episode} = character ? character : {};
-        //return {id, image, name, status, gender, location, episode};
-        return {
-          id: character.id,
-          image: character.image,
-          name: character.name,
-          status: character.status,
-          gender: character.gender,
-          location: character.location.name,
-          episode: character.episode[0]
-        };
-      })
-    })
-    .catch((error) => console.log('error', error));
-}
 
 function rendersCards(currentPage) {
   fetchCharacters(currentPage).then((data) => {
-    characters = data;
-    renderCardItem(characters)
+    renderCardItem(data)
   });
 }
 
@@ -105,7 +72,7 @@ function createDomElement(tagName, className, content) {
 
   if (typeof className === "string") {
     element.classList.add(className);
-  } else if ( Array.isArray(className) ) {
+  } else if (Array.isArray(className)) {
     className.forEach(item => {
       element.classList.add(item);
     });

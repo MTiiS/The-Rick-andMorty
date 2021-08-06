@@ -2,6 +2,7 @@ import "../css/styles.css"
 import pagination from './pagination';
 import { getCurrentPage } from './model/currentPage.js'
 import { fetchCharacters } from './model/fetchData.js'
+import {addModalContent} from './modal.js'
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -50,6 +51,9 @@ function renderCardItem(characters) {
 
     let section3 = createDomElement("section", "modal__openButton");
     let section3_a = createDomElement("a", "card__link", "read more...");
+    section3_a.addEventListener('click', function (e) {
+      e.preventDefault();    
+    })
     section3_a.href = "#";
 
 
@@ -85,6 +89,16 @@ function createDomElement(tagName, className, content) {
   }
   return element;
 }
+
+document.querySelector(".cards").addEventListener("click",function(e) {
+  if (e.target.classList.contains("card__link")) {
+     let itemID = e.target.parentElement.parentElement.parentElement.getAttribute('data-id');
+     addModalContent(itemID);
+  }
+})
+
+
+
 
 
 

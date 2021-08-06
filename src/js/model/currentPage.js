@@ -1,6 +1,6 @@
 import { getConfig } from './config.js'
 
-let currentPage = 1;
+let currentPage = getConfig("FIRST_PAGE");
 
 function getCurrentPage() {
   return currentPage;

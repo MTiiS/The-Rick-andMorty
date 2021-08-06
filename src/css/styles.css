@@ -95,6 +95,30 @@ html, body {
     background-color: rgba(0,0,0,0.8);
 }
 
+.modal__content {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    background: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
+}
+
+.modal__content-text {
+  text-align: left;
+  width: 45%;
+}
+
+.modal__close-button {
+  font-size: 35px;
+  margin-top: -20px;
+  cursor: pointer;
+}
+
+
 .pagination__buttons {
     display: flex;
     justify-content: center;

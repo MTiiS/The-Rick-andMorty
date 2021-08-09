@@ -1,8 +1,8 @@
 import "../css/styles.css"
 import pagination from './pagination';
 import { getCurrentPage } from './model/currentPage.js'
-import { fetchCharacters } from './model/fetchData.js'
-import {addModalContent} from './modal.js'
+import { fetchCharacters } from './model/fetchCharactersInf.js'
+import {showCardModal} from './cardModal.js'
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -92,8 +92,8 @@ function createDomElement(tagName, className, content) {
 
 document.querySelector(".cards").addEventListener("click",function(e) {
   if (e.target.classList.contains("card__link")) {
-     let itemID = e.target.parentElement.parentElement.parentElement.getAttribute('data-id');
-     addModalContent(itemID);
+     let itemID = e.target.closest('[data-id]').getAttribute('data-id');
+     showCardModal (itemID);
   }
 })
 

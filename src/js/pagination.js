@@ -51,7 +51,7 @@ export function resreshDisplayedPages() {
   let lastButtonNumber = (firstButtonNumber + totalButtons - offsetStep);
 
   //add page buttons
-  for (let i = firstButtonNumber - offsetStep; i < lastButtonNumber; i++) {
+  for (let i = firstButtonNumber - offsetStep; i <lastButtonNumber; i++) {
     let isActive = i === currentPage;
     displayedPages.push(new PaginationButton(i, i, isActive));
   }

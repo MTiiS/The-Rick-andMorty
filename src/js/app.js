@@ -1,8 +1,8 @@
-import "../css/styles.css"
+import "../css/styles.css";
 import pagination from './pagination';
-import { getCurrentPage } from './model/currentPage.js'
-import { fetchCharacters } from './model/fetchCharactersInf.js'
-import {showCardModal} from './cardModal.js'
+import { getCurrentPage } from './model/currentPage.js';
+import { fetchCharacters } from './model/fetchCharactersInf.js';
+import { showCardModal } from './cardModal.js';
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -21,7 +21,7 @@ function renderPage() {
 
 
 function rendersCards(currentPage) {
-  fetchCharacters(currentPage).then((data) => {
+  fetchCharacters(currentPage).then( (data) => {
     renderCardItem(data)
   });
 }
@@ -76,7 +76,7 @@ function createDomElement(tagName, className, content) {
 
   if (typeof className === "string") {
     element.classList.add(className);
-  } else if (Array.isArray(className)) {
+  } else if ( Array.isArray(className) ) {
     className.forEach(item => {
       element.classList.add(item);
     });
@@ -84,18 +84,18 @@ function createDomElement(tagName, className, content) {
 
   if (typeof content === "string") {
     element.textContent = content;
-  } else if (Array.isArray(content)) {
+  } else if ( Array.isArray(content) ) {
     element.textContent = content.join("");
   }
   return element;
 }
 
 document.querySelector(".cards").addEventListener("click",function(e) {
-  if (e.target.classList.contains("card__link")) {
+  if ( e.target.classList.contains("card__link") ) {
      let itemID = e.target.closest('[data-id]').getAttribute('data-id');
      showCardModal (itemID);
   }
-})
+});
 
 
 

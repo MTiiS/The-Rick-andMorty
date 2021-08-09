@@ -1,4 +1,4 @@
-import { getConfig } from './config.js'
+import { getConfig } from './config.js';
 
 let currentPage = getConfig("FIRST_PAGE");
 
@@ -30,4 +30,4 @@ function switchToPage(pageId) {
   setCurrentPage(currentPage);
 }
 
-export { getCurrentPage, switchToPage }
+export { getCurrentPage, switchToPage };

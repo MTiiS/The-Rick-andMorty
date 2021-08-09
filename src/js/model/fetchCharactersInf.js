@@ -56,4 +56,4 @@ function fetchCharacterFirstSeenField(character) {
     });
 }
 
-export { fetchCharacters, getCharacters, getCharacterById, fetchCharacterFirstSeenField }
+export { fetchCharacters, getCharacters, getCharacterById, fetchCharacterFirstSeenField };

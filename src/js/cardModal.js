@@ -11,7 +11,7 @@ function showCardModal(itemID) {
 }
 
 function renderCardModal(character) {
-  
+
   let modal = document.createElement("div");
   modal.classList.toggle("modal");
   modal.id = "modal";
@@ -62,4 +62,4 @@ function hideModal() {
   document.getElementById("modal").remove();
 }
 
-export { showCardModal }
+export { showCardModal };

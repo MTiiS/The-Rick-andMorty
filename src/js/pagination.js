@@ -1,5 +1,5 @@
 import { getCurrentPage, switchToPage } from './model/currentPage';
-import { getConfig } from './model/config.js'
+import { getConfig } from './model/config.js';
 
 let displayedPages = [];
 let handlePaginate = null;

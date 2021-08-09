@@ -1,7 +1,7 @@
-import "../css/styles.css"
+import "../css/styles.css";
 import pagination from './pagination';
-import { getCurrentPage } from './model/currentPage.js'
-import { fetchCharacters } from './model/fetchData.js'
+import { getCurrentPage } from './model/currentPage.js';
+import { fetchCharacters } from './model/fetchCharactersInf.js';
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -20,7 +20,7 @@ function renderPage() {
 
 
 function rendersCards(currentPage) {
-  fetchCharacters(currentPage).then((data) => {
+  fetchCharacters(currentPage).then( (data) => {
     renderCardItem(data)
   });
 }
@@ -37,25 +37,25 @@ function renderCardItem(characters) {
     let cardContent = createDomElement("div", "card__content");
 
     let section1 = createDomElement("section");
-    let section1_h1 = createDomElement("h1", ["card__content-item", "card__content-item_highlights"], character.name);
+    let section1_title = createDomElement("h1", ["card__content-item", "card__content-item_highlights"], character.name);
 
 
-    let section1_ul = createDomElement("ul", "card__content-item");
-    let section1_li = createDomElement("li", null, [character.status, "-", character.gender]);
-    section1_ul.append(section1_li);
+    let section1_text = createDomElement("ul", "card__content-item");
+    let section1_textItems = createDomElement("li", null, [character.status, "-", character.gender]);
+    section1_text.append(section1_textItems);
 
     let section2 = createDomElement("section");
-    let section2_h4 = createDomElement("h4", ["card__content-item", "card__content-item_highlights"], "Last known location:");
-    let section2_p = createDomElement("p", null, character.location);
+    let section2_title = createDomElement("h4", ["card__content-item", "card__content-item_highlights"], "Last known location:");
+    let section2_text = createDomElement("p", null, character.location);
 
     let section3 = createDomElement("section", "modal__openButton");
-    let section3_a = createDomElement("a", "card__link", "read more...");
-    section3_a.href = "#";
+    let card_link = createDomElement("a", "card__link", "read more...");
+    card_link.href = "#";
 
 
-    section1.append(section1_h1, section1_ul);
-    section2.append(section2_h4, section2_p);
-    section3.append(section3_a);
+    section1.append(section1_title, section1_text);
+    section2.append(section2_title, section2_text);
+    section3.append(card_link);
 
 
     cardContent.append(section1, section2, section3);
@@ -72,7 +72,7 @@ function createDomElement(tagName, className, content) {
 
   if (typeof className === "string") {
     element.classList.add(className);
-  } else if (Array.isArray(className)) {
+  } else if ( Array.isArray(className) ) {
     className.forEach(item => {
       element.classList.add(item);
     });
@@ -80,7 +80,7 @@ function createDomElement(tagName, className, content) {
 
   if (typeof content === "string") {
     element.textContent = content;
-  } else if (Array.isArray(content)) {
+  } else if ( Array.isArray(content) ) {
     element.textContent = content.join("");
   }
   return element;

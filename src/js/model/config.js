@@ -18,4 +18,4 @@ function getConfig(name) {
   return CONFIG;
 }
 
-export { getConfig }
+export { getConfig };

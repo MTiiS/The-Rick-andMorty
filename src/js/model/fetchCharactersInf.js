@@ -9,23 +9,23 @@ function fetchCharacters(currentPage) {
   let url = "https://rickandmortyapi.com/api/character/?page=" + currentPage;
 
   return fetch(url)
-    .then( (response) => response.json() )
-    .then( (data) => {
+  .then( (response) => response.json() )
+  .then( (data) => {
+    if (data) {
       return characters = data.results.map( (character) => {
-        //const { id, image, name, status, gender, location, episode} = character ? character : {};
-        //return {id, image, name, status, gender, location, episode};
         return {
-          id: character.id,
+          id: character.id || null,
           image: character.image,
           name: character.name,
           status: character.status,
           gender: character.gender,
           location: character.location.name,
-          episode: character.episode[0]
+          episode: character.episode[0] || null
         };
-      })
-    })
-    .catch((error) => console.log('error', error));
+      });
+    } else return {};
+  })
+  .catch( (error) => console.log('error', error) );
 }
 
-export { fetchCharacters }
+export { fetchCharacters };

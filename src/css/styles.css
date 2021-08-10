@@ -69,11 +69,11 @@ html, body {
     padding-left: 10px;
 }
 
-.card__element {
+.card__content-item {
     margin: 0px;
 }
 
-.card__content_highlights {
+.card__content-item_highlights {
     color: #eeeefa;
 
 }
@@ -81,6 +81,18 @@ html, body {
 .card__link {
     color: rgba(255, 255, 255, 0.65);
     text-decoration: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
 }
 
 .pagination__buttons {
@@ -101,11 +113,16 @@ html, body {
     float: left;
     padding: 8px 16px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .pagination__button_active {
     background-color: #494d55;
     color: white;
+}
+
+.pagination__button_disabled {
+    opacity:0.6;
 }
 
 .footer {

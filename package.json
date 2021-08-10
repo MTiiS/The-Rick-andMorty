@@ -1,0 +1,30 @@
+{
+  "name": "the-rick-andmorty",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^6.2.0",
+    "html-loader": "^2.1.2",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.48.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack serve --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MTiiS/The-Rick-andMorty.git"
+  },
+  "author": "Mtis <kachurvova@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MTiiS/The-Rick-andMorty/issues"
+  },
+  "homepage": "https://github.com/MTiiS/The-Rick-andMorty#readme"
+}

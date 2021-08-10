@@ -1,6 +1,7 @@
 import { getConfig } from './config.js';
 
-let currentPage = 1;
+let firstPage = getConfig("FIRST_LOAD_PAGE");
+let currentPage = firstPage;
 
 function getCurrentPage() {
   return currentPage;
@@ -11,12 +12,12 @@ function setCurrentPage(pageNumber) {
 }
 
 function switchToPage(pageId) {
-  //config
+  // config
   let PREV_BUTTON = getConfig("PREV_BUTTON");
   let NEXT_BUTTON = getConfig("NEXT_BUTTON");
   let lastPage = getConfig("TOTAL_PAGES");
   let currentPage = getCurrentPage();
-
+  
   switch (pageId) {
     case PREV_BUTTON.id:
       if (currentPage > 1) currentPage--;

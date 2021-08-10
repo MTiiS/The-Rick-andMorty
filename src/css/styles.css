@@ -113,11 +113,16 @@ html, body {
     float: left;
     padding: 8px 16px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .pagination__button_active {
     background-color: #494d55;
     color: white;
+}
+
+.pagination__button_disabled {
+    opacity:0.6;
 }
 
 .footer {

@@ -1,21 +1,18 @@
-import { getCharacterById, fetchCharacterFirstSeenField } from "./model/characters.js";
+import { getCharacterById, refreshCharacter } from "./model/characters.js";
 
 
-function showCardModal(itemID) {
-
+async function showCardModal(itemID) {
   let character = getCharacterById(itemID);
-  fetchCharacterFirstSeenField(character)
-    .then( () => {
-      renderCardModal(character);
-    });
+  await refreshCharacter(character);
+  renderCardModal(character);
+  addModalEvents();
 }
 
 function renderCardModal(character) {
 
   let modal = document.createElement("div");
   modal.classList.toggle("modal");
-  modal.id = "modal";
-  document.getElementById("body").append(modal);
+  document.querySelector(".body").append(modal);
 
   let img = document.createElement("img");
   img.src = character.image;
@@ -23,9 +20,7 @@ function renderCardModal(character) {
   let modalText = document.createElement("div");
   modalText.classList.add("modal__content-text")
   let characterKeys = ["name", "status", "gender", "location", "first_seen"];
-  let contentSections = createContentSections(characterKeys, character);
-  let [nameSection, statusSection, genderSection, locationSection, last_seenSection] = contentSections;
-  modalText.append(nameSection, statusSection, genderSection, locationSection, last_seenSection);
+  modalText.append(...createContentSections(characterKeys, character) );
 
   let buttonClose = document.createElement("span");
   buttonClose.classList.add("modal__close-button");
@@ -52,14 +47,16 @@ function createContentSections(characterKeys, character) {
   });
 }
 
-window.onclick = function (event) {
-  if (event.target === document.getElementById("modal")) {
-    hideModal();
+function addModalEvents () {
+  window.onclick = function (event) {
+    if (event.target === document.getElementById("modal")) {
+      hideModal();
+    }
   }
 }
 
 function hideModal() {
-  document.getElementById("modal").remove();
+  document.querySelector(".modal").remove();
 }
 
 export { showCardModal };

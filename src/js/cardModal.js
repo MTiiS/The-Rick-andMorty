@@ -1,4 +1,4 @@
-import { getCharacterById, fetchCharacterFirstSeenField } from "./model/fetchCharactersInf.js";
+import { getCharacterById, fetchCharacterFirstSeenField } from "./model/characters.js";
 
 
 function showCardModal(itemID) {

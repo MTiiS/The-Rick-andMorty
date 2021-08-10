@@ -1,7 +1,7 @@
 import "../css/styles.css";
 import pagination from './pagination';
 import { getCurrentPage } from './model/currentPage.js';
-import { fetchCharacters } from './model/fetchCharactersInf.js';
+import { fetchCharacters } from './model/characters.js';
 import { showCardModal } from './cardModal.js';
 
 

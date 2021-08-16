@@ -1,69 +1,92 @@
 import "../css/styles.css";
-import initPagination from './pagination';
-import { getCurrentPage } from './model/currentPage.js';
-import { fetchCharacters } from './model/characters.js';
+import { initPagination, refreshPagination } from './pagination';
+import { refreshCharacters, getCharacters } from './model/characters.js';
+import { initSearch, createSearchRequest } from "./search.js";
+
 
 initPage();
 
 function initPage() {
-  document.addEventListener("DOMContentLoaded", function () {
-    renderPage();
+  document.addEventListener("DOMContentLoaded", async function () {
+    await renderPage();
+    addPageEvents();
     initPagination({
       onPaginate: function () {
         renderPage();
       }
     });
+    initSearch({
+      onSearch: async function () {
+        await renderPage();
+        refreshPagination();
+      }
+    });
   });
 }
 
-function renderPage() {
-  let currentPage = getCurrentPage();
-  rendersCards(currentPage);
+async function renderPage() {
+  await refreshCharacters();
+  rendersCards();
 }
 
-async function rendersCards(currentPage) {
+function rendersCards() {
   let cards = document.querySelector(".cards");
   cards.innerHTML = "";
 
-  let characters = await fetchCharacters(currentPage);
+  let characters = getCharacters();
+
+  if (characters) {
     for (let character of characters) {
-      cards.append( renderCard(character) );
-  }
+      cards.append(renderCard(character));
+    }
+    return true;
+  } else { showCharactersNotFound() }
 }
 
 function renderCard(character) {
-  
-    let card = createDomElement("div", "card");
-    card.dataset.id = character.id;
-    let cardImage = createDomElement("img", "card__img", character.image);
-    cardImage.src = character.image;
-    let cardContent = createDomElement("div", "card__content");
 
-    let section1 = createDomElement("section");
-    let section1Title = createDomElement("h1", ["card__content-item", "card__content-item_highlights"], character.name);
+  let card = createDomElement("div", "card");
+  card.dataset.id = character.id;
+  let cardImage = createDomElement("img", "card__img", character.image);
+  cardImage.src = character.image;
+  let cardContent = createDomElement("div", "card__content");
+
+  let section1 = createDomElement("section");
+  let section1Title = createDomElement("h1", ["card__content-title", "card__content-title_highlights"], character.name);
+  card.dataset.name = character.name;
 
 
-    let section1Text = createDomElement("ul", "card__content-item");
-    let section1TextItem = createDomElement("li", null, [character.status, "-", character.gender]);
-    section1Text.append(section1TextItem);
+  let status = createDomElement("p", "card__content-text", "status: " + character.status);
+  status.dataset.status = character.status;
+  let gender = createDomElement("p", "card__content-text", "gender: " + character.gender);
+  gender.dataset.gender = character.gender;
 
-    let section2 = createDomElement("section");
-    let section2Title = createDomElement("h4", ["card__content-item", "card__content-item_highlights"], "Last known location:");
-    let section2Text = createDomElement("p", null, character.location);
 
-    let section3 = createDomElement("section", "modal__openButton");
-    let cardLink = createDomElement("a", "card__link", "read more...");
-    cardLink.href = "#";
+  let section2 = createDomElement("section");
+  let section2Title = createDomElement("h4", ["card__content-title", "card__content-title_highlights"], "Last known location:");
+  let section2Text = createDomElement("p", "card__content-text", character.location);
 
-    section1.append(section1Title, section1Text);
-    section2.append(section2Title, section2Text);
-    section3.append(cardLink);
+  let section3 = createDomElement("section", "modal__openButton");
+  let cardLink = createDomElement("a", "card__link", "read more...");
+  cardLink.href = "#";
 
-    cardContent.append(section1, section2, section3);
+  section1.append(section1Title, status, gender);
+  section2.append(section2Title, section2Text);
+  section3.append(cardLink);
 
-    card.append(cardImage, cardContent);
+  cardContent.append(section1, section2, section3);
 
-    return card;
+  card.append(cardImage, cardContent);
+
+  return card;
+}
+
+function showCharactersNotFound() {
+  let cards = document.querySelector(".cards");
+  let error = document.createElement("h1");
+  error.textContent = "oops....Characters not found"
+  cards.innerHTML = "";
+  cards.append(error);
 }
 
 function createDomElement(tagName, className, content) {
@@ -72,8 +95,8 @@ function createDomElement(tagName, className, content) {
   if (typeof className === "string") {
     element.classList.add(className);
   } else if ( Array.isArray(className) ) {
-    className.forEach(item => {
-      element.classList.add(item);
+    className.forEach( (name) => {
+      element.classList.add(name);
     });
   }
 
@@ -84,6 +107,19 @@ function createDomElement(tagName, className, content) {
   }
   return element;
 }
+
+function addPageEvents() {
+
+  document.querySelector(".cards").addEventListener("click", (e) => {
+    if (e.target.dataset.status) {
+      createSearchRequest('status', e.target.dataset.status);
+    } else if (e.target.dataset.gender) {
+      createSearchRequest('gender', e.target.dataset.gender);
+    }
+  });
+}
+
+
 
 
 

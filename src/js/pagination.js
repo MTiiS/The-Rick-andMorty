@@ -1,16 +1,17 @@
+import { getTotalPages } from "./model/characters.js"
 import { getCurrentPage, switchToPage } from './model/currentPage';
 import { getConfig } from './model/config.js';
 
-let displayedButtons = [];
+
+let _displayedButtons = [];
 let handlePaginate = null;
 
-
 function setDisplayedButtons(pagesNumbers) {
-  displayedButtons = pagesNumbers;
+  _displayedButtons = pagesNumbers;
 }
 
 function getDisplayedButtons() {
-  return displayedButtons;
+  return _displayedButtons;
 }
 
 function PaginationButton(id, text, isActive = false, isDisabled = false) {
@@ -20,19 +21,28 @@ function PaginationButton(id, text, isActive = false, isDisabled = false) {
   this.isDisabled = isDisabled;
 }
 
-function init(config) {
-  resreshDisplayedButtons();
-  renderPagination();
+function initPagination(config) {
+  refreshPagination()
   addPaginationEvents();
 
-  handlePaginate = config.onPaginate;
+  if (config) {
+    handlePaginate = config.onPaginate;
+  }
 }
 
-export function resreshDisplayedButtons() {
+function refreshPagination() {
+
+  refreshDisplayedButtons();
+  renderPagination();
+}
+
+function refreshDisplayedButtons() {
+  setDisplayedButtons([]);
+  let displayedButtons = getDisplayedButtons();
+  let totalPages = getTotalPages();
   // config
   let prevButton = getConfig("PREV_BUTTON");
   let nextButton = getConfig("NEXT_BUTTON");
-  let totalPages = getConfig("TOTAL_PAGES");
   let totalButtons = getConfig("TOTAL_PAGIN_BUTTONS");
   let offsetStart = getConfig("OFFSET_START");
   let offsetStep = getConfig("OFFSET_STEP");
@@ -40,35 +50,37 @@ export function resreshDisplayedButtons() {
 
   let currentPage = getCurrentPage();
   let firstButtonNumber = currentPage;
+  if (totalPages) {
+    // if current page < offsetStart rendering always starts from "1" button without offset
+    if (currentPage < offsetStart | currentPage < totalButtons) {
+      firstButtonNumber = 1;
+      offsetStep = 0;
+    } else if (currentPage >= totalPages - offsetStep) {
+      firstButtonNumber = (totalPages - totalButtons);
+      offsetStep = 0;
+    }
 
+    let lastButtonNumber = (firstButtonNumber + totalButtons - offsetStep);
+    if (lastButtonNumber > totalPages) {
+      lastButtonNumber = totalPages;
+    }
 
-  let displayedButtons = [];
+    // add page buttons
+    for (let i = firstButtonNumber - offsetStep; i <= lastButtonNumber; i++) {
+      let isActive = i === currentPage;
+      displayedButtons.push( new PaginationButton(i, i, isActive) );
+    }
 
-  // if current page < offsetStart rendering always starts from "1" button without offset
-  if (currentPage < offsetStart) {
-    firstButtonNumber = 1;
-    offsetStep = 0;
-  } else if (currentPage >= totalPages - offsetStep) {
-    firstButtonNumber = (totalPages - totalButtons);
-    offsetStep = 0;
+    // add navigation buttons
+    let isDisabled = false;
+    isDisabled = currentPage === firstPage;
+    displayedButtons.unshift( new PaginationButton(prevButton.id, prevButton.content, false, isDisabled) );
+    isDisabled = currentPage === totalPages;
+    displayedButtons.push( new PaginationButton(nextButton.id, nextButton.content, false, isDisabled) );
+
+    // add buttons to array
+    setDisplayedButtons(displayedButtons);
   }
-  let lastButtonNumber = (firstButtonNumber + totalButtons - offsetStep);
-
-  // add page buttons
-  for (let i = firstButtonNumber - offsetStep; i <= lastButtonNumber; i++) {
-    let isActive = i === currentPage;
-    displayedButtons.push(new PaginationButton(i, i, isActive));
-  }
-
-  // add navigation buttons
-  let isDisabled = false;
-  isDisabled = currentPage === firstPage;
-  displayedButtons.unshift( new PaginationButton(prevButton.id, prevButton.content, false, isDisabled) );
-  isDisabled = currentPage === totalPages;
-  displayedButtons.push( new PaginationButton(nextButton.id, nextButton.content, false, isDisabled) );
-
-  // add buttons to array
-  setDisplayedButtons(displayedButtons);
 }
 
 function renderPagination() {
@@ -76,9 +88,12 @@ function renderPagination() {
   const paginator = document.querySelector(".pagination__buttons");
   paginator.innerHTML = "";
 
-  for (let button of displayedButtons) {
-    paginator.append( createPaginationButton(button) );
-  }
+
+  if (displayedButtons.length > 0) {
+    for (let button of displayedButtons) {
+      paginator.append( createPaginationButton(button) );
+    }
+  } else paginator.innerHTML = "";
 }
 
 function createPaginationButton(button) {
@@ -89,7 +104,7 @@ function createPaginationButton(button) {
 
   if (button.isActive === true) {
     buttonEl.classList.add("pagination__button_active");
-  } 
+  }
 
   if (button.isDisabled === true) {
     buttonEl.classList.add("pagination__button_disabled");
@@ -99,22 +114,21 @@ function createPaginationButton(button) {
 }
 
 function addPaginationEvents() {
-  document.querySelector(".pagination__buttons").addEventListener("click", function (e) {
+  document.querySelector(".pagination__buttons").addEventListener("click", (e) => {
     let pageId = e.target.dataset.page;
-   
-    if (e.target.classList.contains("pagination__button_disabled")) {
+
+    if ( e.target.classList.contains("pagination__button_disabled") ) {
       e.stopPropagation();
-    } else if (e.target.classList.contains("pagination__button")) {
+    } else if ( e.target.classList.contains("pagination__button") ) {
       switchToPage(pageId);
-      resreshDisplayedButtons();
+      refreshDisplayedButtons();
       renderPagination();
-      if (handlePaginate){
+      if (handlePaginate) {
         handlePaginate();
       }
       window.scrollTo(0, 0);
     }
-})
+  })
 }
 
-
-export default init;
+export { initPagination, refreshPagination }

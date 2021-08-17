@@ -2,6 +2,7 @@ import "../css/styles.css";
 import initPagination from './pagination';
 import { getCurrentPage } from './model/currentPage.js';
 import { fetchCharacters } from './model/characters.js';
+import { showSpinner, hideSpinner } from "./spinner.js"
 
 initPage();
 
@@ -16,9 +17,11 @@ function initPage() {
   });
 }
 
-function renderPage() {
+async function renderPage() {
+  showSpinner();
   let currentPage = getCurrentPage();
-  rendersCards(currentPage);
+  await rendersCards(currentPage);
+  hideSpinner();
 }
 
 async function rendersCards(currentPage) {

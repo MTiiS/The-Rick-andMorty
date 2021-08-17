@@ -133,3 +133,92 @@ html, body {
 }
 
 
+.spinner {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.spinner-whirlpool,
+.spinner-whirlpool::before,
+.spinner-whirlpool::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgb(205, 219, 15);
+  border-left-color: rgb(11, 214, 180);
+  border-radius: 974px;
+  -o-border-radius: 974px;
+  -ms-border-radius: 974px;
+  -webkit-border-radius: 974px;
+  -moz-border-radius: 974px;
+}
+
+.spinner-whirlpool {
+  margin: -24px 0 0 -24px;
+  height: 49px;
+  width: 49px;
+  animation: spinner-rotate 800ms linear infinite;
+  -o-animation: spinner-rotate 800ms linear infinite;
+  -ms-animation: spinner-rotate 800ms linear infinite;
+  -webkit-animation: spinner-rotate 800ms linear infinite;
+  -moz-animation: spinner-rotate 800ms linear infinite;
+}
+
+.spinner-whirlpool::before {
+  content: "";
+  margin: -22px 0 0 -22px;
+  height: 43px;
+  width: 43px;
+  animation: spinner-rotate 800ms linear infinite;
+  -o-animation: spinner-rotate 800ms linear infinite;
+  -ms-animation: spinner-rotate 800ms linear infinite;
+  -webkit-animation: spinner-rotate 800ms linear infinite;
+  -moz-animation: spinner-rotate 800ms linear infinite;
+}
+
+.spinner-whirlpool::after {
+  content: "";
+  margin: -28px 0 0 -28px;
+  height: 55px;
+  width: 55px;
+  animation: spinner-rotate 1600ms linear infinite;
+  -o-animation: spinner-rotate 1600ms linear infinite;
+  -ms-animation: spinner-rotate 1600ms linear infinite;
+  -webkit-animation: spinner-rotate 1600ms linear infinite;
+  -moz-animation: spinner-rotate 1600ms linear infinite;
+}
+
+@keyframes spinner-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes spinner-rotate {
+  100% {
+    -o-transform: rotate(360deg);
+  }
+}
+
+@-ms-keyframes spinner-rotate {
+  100% {
+    -ms-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spinner-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spinner-rotate {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+

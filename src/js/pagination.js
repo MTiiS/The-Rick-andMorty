@@ -1,9 +1,9 @@
 import { getCurrentPage, switchToPage } from './model/currentPage';
 import { getConfig } from './model/config.js';
 
+
 let displayedButtons = [];
 let handlePaginate = null;
-
 
 function setDisplayedButtons(pagesNumbers) {
   displayedButtons = pagesNumbers;
@@ -40,7 +40,6 @@ export function resreshDisplayedButtons() {
 
   let currentPage = getCurrentPage();
   let firstButtonNumber = currentPage;
-
 
   let displayedButtons = [];
 
@@ -115,6 +114,5 @@ function addPaginationEvents() {
     }
 })
 }
-
 
 export default init;

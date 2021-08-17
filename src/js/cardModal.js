@@ -1,9 +1,9 @@
-import { getCharacterById, refreshCharacter } from "./model/characters.js";
+import { getCharacterById, setCharacterEpisodeName } from "./model/characters.js";
 
 
 async function showCardModal(itemID) {
   let character = getCharacterById(itemID);
-  await refreshCharacter(character);
+  await setCharacterEpisodeName(character);
   renderCardModal(character);
   addModalEvents();
 }
@@ -20,7 +20,7 @@ function renderCardModal(character) {
   let modalText = document.createElement("div");
   modalText.classList.add("modal__content-text")
   let characterKeys = ["name", "status", "gender", "location", "first_seen"];
-  modalText.append(...createContentSections(characterKeys, character) );
+  modalText.append( ...createContentSections(characterKeys, character) );
 
   let buttonClose = document.createElement("span");
   buttonClose.classList.add("modal__close-button");
@@ -47,9 +47,9 @@ function createContentSections(characterKeys, character) {
   });
 }
 
-function addModalEvents () {
+function addModalEvents() {
   window.onclick = function (event) {
-    if (event.target === document.getElementById("modal")) {
+    if ( event.target === document.getElementById("modal") ) {
       hideModal();
     }
   }

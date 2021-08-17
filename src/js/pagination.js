@@ -56,7 +56,7 @@ export function resreshDisplayedButtons() {
   // add page buttons
   for (let i = firstButtonNumber - offsetStep; i <= lastButtonNumber; i++) {
     let isActive = i === currentPage;
-    displayedButtons.push(new PaginationButton(i, i, isActive));
+    displayedButtons.push( new PaginationButton(i, i, isActive) );
   }
 
   // add navigation buttons
@@ -101,9 +101,9 @@ function addPaginationEvents() {
   document.querySelector(".pagination__buttons").addEventListener("click", function (e) {
     let pageId = e.target.dataset.page;
    
-    if (e.target.classList.contains("pagination__button_disabled")) {
+    if ( e.target.classList.contains("pagination__button_disabled") ) {
       e.stopPropagation();
-    } else if (e.target.classList.contains("pagination__button")) {
+    } else if ( e.target.classList.contains("pagination__button") ) {
       switchToPage(pageId);
       resreshDisplayedButtons();
       renderPagination();

@@ -36,15 +36,19 @@ function renderCardModal(character) {
 }
 
 function createContentSections(characterKeys, character) {
-  return characterKeys.map(key => {
+  return characterKeys.map( (key) => {
     let section = document.createElement("section");
     let title = document.createElement("h1");
-    title.textContent = key + ":";
+    title.textContent = capitalizeString(key) + ":";
     let text = document.createElement("p");
     text.textContent = character[key];
     section.append(title, text);
     return section;
   });
+}
+
+function capitalizeString(string) {
+  return string[0].toUpperCase() + string.slice(1);
 }
 
 function addModalEvents() {

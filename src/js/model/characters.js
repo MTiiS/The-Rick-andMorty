@@ -7,14 +7,15 @@ function getCharacters() {
 }
 
 function getCharacterById(id) {
-  return getCharacterByProperty('id', id);
+  return getCharacterByProperty( 'id', Number(id) );
 }
 
 function getCharacterByProperty(propertyName, propertyValue) {
   if (propertyValue) {
-    return characters.find((character) => {
-        character[propertyName] === Number(propertyValue)
+    return characters.find( (character) => {
+      return character[propertyName] === propertyValue 
     });
+
   }
 }
 

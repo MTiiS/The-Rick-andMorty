@@ -5,7 +5,6 @@ import { fetchCharacters } from './model/characters.js';
 import { showCardModal } from './cardModal.js';
 
 
-
 initPage();
 
 function initPage() {
@@ -31,7 +30,7 @@ async function rendersCards(currentPage) {
 
   let characters = await fetchCharacters(currentPage);
   for (let character of characters) {
-    cards.append(renderCard(character));
+    cards.append( renderCard(character) );
   }
 }
 
@@ -94,7 +93,7 @@ function createDomElement(tagName, className, content) {
 
 function addPageEvents() {
   document.querySelector(".cards").addEventListener("click", (e) => {
-    if (e.target.classList.contains("card__link")) {
+    if ( e.target.classList.contains("card__link") ) {
       let itemID = e.target.closest('[data-id]').getAttribute('data-id');
       showCardModal(itemID);
     }

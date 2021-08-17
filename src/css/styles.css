@@ -115,6 +115,10 @@ body {
   text-decoration: none;
 }
 
+.card__status-mark {
+  margin-right: 5px;
+}
+
 .card__status-mark_dead {
   color: tomato;
   font-size: 20px;

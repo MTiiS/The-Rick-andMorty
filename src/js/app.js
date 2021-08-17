@@ -37,10 +37,12 @@ function rendersCards() {
 
   if (characters) {
     for (let character of characters) {
-      cards.append(renderCard(character));
+      cards.append( renderCard(character) );
     }
     return true;
-  } else { showCharactersNotFound() }
+  } else { 
+    showCharactersNotFound(); 
+  }
 }
 
 function renderCard(character) {
@@ -57,7 +59,7 @@ function renderCard(character) {
 
 
   let status = createDomElement("p", "card__content-text", "status: " + character.status);
-  let statusMark = createDomElement("span", generateStatusMarkClassName(character.status), "● ");
+  let statusMark = createDomElement("span",["card__status-mark", generateStatusMarkClassName(character.status)], "●");
   status.prepend(statusMark);
   status.dataset.status = character.status;
 

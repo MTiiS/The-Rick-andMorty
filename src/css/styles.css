@@ -95,6 +95,7 @@ body {
 }
 
 .card__content-text {
+  padding-left: 10px;
   margin: 0px;
   height: min-content;
   cursor: pointer;
@@ -112,6 +113,16 @@ body {
 .card__link {
   color: rgba(255, 255, 255, 0.65);
   text-decoration: none;
+}
+
+.card__status-mark_dead {
+  color: tomato;
+  font-size: 20px;
+}
+
+.card__status-mark_alive {
+  color: #23D18B;
+  font-size: 20px;
 }
 
 .modal {

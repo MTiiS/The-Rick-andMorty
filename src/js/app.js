@@ -57,7 +57,10 @@ function renderCard(character) {
 
 
   let status = createDomElement("p", "card__content-text", "status: " + character.status);
+  let statusMark = createDomElement("span", generateStatusMarkClassName(character.status), "● ");
+  status.prepend(statusMark);
   status.dataset.status = character.status;
+
   let gender = createDomElement("p", "card__content-text", "gender: " + character.gender);
   gender.dataset.gender = character.gender;
 
@@ -106,6 +109,14 @@ function createDomElement(tagName, className, content) {
     element.textContent = content.join("");
   }
   return element;
+}
+
+function generateStatusMarkClassName(status) {
+  if (status == "Dead") {
+    return "card__status-mark_dead";
+  } else if (status == "Alive") {
+    return "card__status-mark_alive";
+  }
 }
 
 function addPageEvents() {

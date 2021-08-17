@@ -132,4 +132,17 @@ html, body {
     font-size: 11px;
 }
 
+.filter__button {
+  background-color: transparent;
+  border: none;
+  float: right;
+  cursor: pointer;
+  margin-top: 5px;
+  width: 24px;
+  height: 24px;
+  background-image: url(../icons/sort.svg);
+}
 
+.filter__button_reverse{
+  background-image: url(../icons/sort-reverse.svg);
+}

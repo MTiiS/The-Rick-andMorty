@@ -1,3 +1,4 @@
+import { sort,  reverseSort } from "./filter.js";
 import "../css/styles.css";
 import initPagination from './pagination';
 import { getCurrentPage } from './model/currentPage.js';
@@ -8,6 +9,7 @@ initPage();
 function initPage() {
   document.addEventListener("DOMContentLoaded", function () {
     renderPage();
+    addPageEvents();
     initPagination({
       onPaginate: function () {
         renderPage();
@@ -26,6 +28,8 @@ async function rendersCards(currentPage) {
   cards.innerHTML = "";
 
   let characters = await fetchCharacters(currentPage);
+  if (characters)
+    sort(characters);
     for (let character of characters) {
       cards.append( renderCard(character) );
   }
@@ -83,6 +87,13 @@ function createDomElement(tagName, className, content) {
     element.textContent = content.join("");
   }
   return element;
+}
+
+function addPageEvents() {
+  document.querySelector(".filter").addEventListener("click", () => {
+    reverseSort();
+    renderPage();
+  })
 }
 
 

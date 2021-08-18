@@ -1,31 +1,46 @@
-let characters = {};
+import { fetchCharacters} from "./rickAndMortyApi.js"
+
+let _characters = [];
+let _totalPages = 0;
+
+function setCharacters(characters) {
+  _characters = characters;
+}
 
 function getCharacters() {
-  return characters;
+  return _characters;
 }
 
-function fetchCharacters(currentPage) {
-
-  let url = "https://rickandmortyapi.com/api/character/?page=" + currentPage;
-
-  return fetch(url)
-  .then( (response) => response.json() )
-  .then( (data) => {
-    if (data) {
-      return characters = data.results.map( (character) => {
-        return {
-          id: character.id || null,
-          image: character.image,
-          name: character.name,
-          status: character.status,
-          gender: character.gender,
-          location: character.location.name,
-          episode: character.episode[0] || null
-        };
-      });
-    } else return {};
-  })
-  .catch( (error) => console.log('error', error) );
+function setTotalPages(pages) {
+  _totalPages = pages;
 }
 
-export { fetchCharacters };
+function getTotalPages() {
+  return _totalPages;
+}
+
+async function refreshCharacters() {
+
+  setTotalPages(0);
+  setCharacters(null);
+
+  let apiData = await fetchCharacters();
+  if (apiData && !apiData.error) {
+    let characters = apiData.results.map( (character) => {
+      return {
+        id: character.id || null,
+        image: character.image,
+        name: character.name,
+        status: character.status,
+        gender: character.gender,
+        location: character.location.name,
+        episode: character.episode[0] || null
+      };
+    });
+    setCharacters(characters);
+    setTotalPages(apiData.info.pages);
+  }
+  return [];
+}
+
+export { refreshCharacters, getCharacters, getTotalPages };

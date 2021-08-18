@@ -78,9 +78,10 @@ function refreshDisplayedButtons() {
     isDisabled = currentPage === totalPages;
     displayedButtons.push( new PaginationButton(nextButton.id, nextButton.content, false, isDisabled) );
 
-    // add buttons to array
-    setDisplayedButtons(displayedButtons);
   }
+
+  // add buttons to array
+  setDisplayedButtons(displayedButtons);
 }
 
 function renderPagination() {

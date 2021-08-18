@@ -16,8 +16,7 @@ function switchToPage(pageId) {
   let PREV_BUTTON = getConfig("PREV_BUTTON");
   let NEXT_BUTTON = getConfig("NEXT_BUTTON");
   let currentPage = getCurrentPage();
-
-
+  
   switch (pageId) {
     case PREV_BUTTON.id:
       currentPage--;

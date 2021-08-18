@@ -3,6 +3,8 @@ import { showSpinner, hideSpinner } from "./spinner.js"
 import { initPagination, refreshPagination } from './pagination';
 import { refreshCharacters, getCharacters } from './model/characters.js';
 import { initSearch, createSearchRequest } from "./search.js";
+import { showCardModal } from './cardModal.js';
+import { initSort, sort } from "./filter";
 
 
 initPage();
@@ -22,29 +24,35 @@ function initPage() {
         refreshPagination();
       }
     });
+    initSort({
+      className: ".filter",
+      onSort: function (){
+        renderCards();
+      }
+    });
   });
 }
 
 async function renderPage() {
   showSpinner();
   await refreshCharacters();
-  rendersCards();
+  renderCards();
   hideSpinner();
 }
 
-function rendersCards() {
+function renderCards() {
   let cards = document.querySelector(".cards");
   cards.innerHTML = "";
 
   let characters = getCharacters();
-
+  characters = sort(characters, "name");
   if (characters) {
     for (let character of characters) {
       cards.append( renderCard(character) );
     }
     return true;
   } else { 
-    showCharactersNotFound(); 
+    showCharactersNotFound();
   }
 }
 
@@ -59,7 +67,6 @@ function renderCard(character) {
   let section1 = createDomElement("section");
   let section1Title = createDomElement("h1", ["card__content-title", "card__content-title_highlights"], character.name);
   card.dataset.name = character.name;
-
 
   let status = createDomElement("p", "card__content-text", "status: " + character.status);
   let statusMark = createDomElement("span",["card__status-mark", generateStatusMarkClassName(character.status)], "●");
@@ -76,6 +83,9 @@ function renderCard(character) {
 
   let section3 = createDomElement("section", "modal__openButton");
   let cardLink = createDomElement("a", "card__link", "read more...");
+  cardLink.addEventListener('click', function (e) {
+    e.preventDefault();
+  });
   cardLink.href = "#";
 
   section1.append(section1Title, status, gender);
@@ -133,8 +143,14 @@ function addPageEvents() {
       createSearchRequest('gender', e.target.dataset.gender);
     }
   });
-}
 
+    document.querySelector(".cards").addEventListener("click", (e) => {
+      if ( e.target.classList.contains("card__link") ) {
+        let itemID = e.target.closest('[data-id]').getAttribute('data-id');
+        showCardModal(itemID);
+      }
+    });
+}
 
 
 

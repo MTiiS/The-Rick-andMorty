@@ -1,4 +1,5 @@
-import { fetchCharacters} from "./rickAndMortyApi.js"
+import { fetchCharacters, fetchEpisode } from "./rickAndMortyApi.js";
+
 
 let _characters = [];
 let _totalPages = 0;
@@ -17,6 +18,20 @@ function setTotalPages(pages) {
 
 function getTotalPages() {
   return _totalPages;
+}
+
+function getCharacterById(id) {
+  return getCharacterByProperty( 'id', Number(id) );
+}
+
+function getCharacterByProperty(propertyName, propertyValue) {
+  let characters = getCharacters();
+  if (propertyValue) {
+    return characters.find( (character) => {
+      return character[propertyName] === propertyValue
+    });
+
+  }
 }
 
 async function refreshCharacters() {
@@ -43,4 +58,10 @@ async function refreshCharacters() {
   return [];
 }
 
-export { refreshCharacters, getCharacters, getTotalPages };
+async function setCharacterEpisodeName(character) {
+  let url = character.episode;
+  let episode = await fetchEpisode(url);
+  character['first_seen'] = episode.name;
+}
+
+export { refreshCharacters, getCharacters, getCharacterById, setCharacterEpisodeName, getTotalPages };

@@ -6,7 +6,7 @@
   <title> The Rick and Morty </title>
 </head>
 
-<body>
+<body class="body">
 
   <div class="search">
     <form class="search__form">
@@ -15,22 +15,22 @@
 
       <label for="gender">Gender:</label>
       <select class="search__input" name="gender">
-          <option selected disabled>choose gender:</option>
-          <option value="male">male</option>
-          <option value="female">female</option>
-          <option value="genderless">genderless</option>
-          <option value="unknown">unknown</option>
-        </select>
+        <option selected disabled>choose gender:</option>
+        <option value="male">male</option>
+        <option value="female">female</option>
+        <option value="genderless">genderless</option>
+        <option value="unknown">unknown</option>
+      </select>
 
       <label for="status">Status:</label>
       <select class="search__input" name="status">
-          <option selected disabled>choose status:</option>
-          <option value="alive">Alive</option>
-          <option value="dead">Dead</option>
-          <option value="unknown">unknown</option>
-        </select>
+        <option selected disabled>choose status:</option>
+        <option value="alive">Alive</option>
+        <option value="dead">Dead</option>
+        <option value="unknown">unknown</option>
+      </select>
 
-        <div></div>
+      <div></div>
       <div>
         <button class="form__submit-button" type="submit">Search</button>
       </div>
@@ -44,12 +44,9 @@
         The Rick and Morty
       </h1>
     </header>
+    <div class="filter"></div>
     <button class="search-open-button"></button>
     <div class="cards"></div>
-
-    <div id="modal" class="modal">
-      <div class="modal-content"></div>
-    </div>
 
     <div class="pagination">
       <ul class="pagination__buttons"></ul>
@@ -58,7 +55,6 @@
     <footer class="footer">
       <p>MTiS</p>
     </footer>
-
   </main>
 
   <script src="bundle.js"></script>

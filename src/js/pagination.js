@@ -37,8 +37,7 @@ function refreshPagination() {
 }
 
 function refreshDisplayedButtons() {
-  setDisplayedButtons([]);
-  let displayedButtons = getDisplayedButtons();
+  let displayedButtons = [];
   let totalPages = getTotalPages();
   // config
   let prevButton = getConfig("PREV_BUTTON");
@@ -50,6 +49,7 @@ function refreshDisplayedButtons() {
 
   let currentPage = getCurrentPage();
   let firstButtonNumber = currentPage;
+  
   if (totalPages) {
     // if current page < offsetStart rendering always starts from "1" button without offset
     if (currentPage < offsetStart | currentPage < totalButtons) {

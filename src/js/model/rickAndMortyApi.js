@@ -12,4 +12,9 @@ function fetchCharacters() {
     .catch( (error) => console.log('error', error) );
 }
 
-export { fetchCharacters }
+async function fetchEpisode(url) {
+  let episodeResponse = await fetch(url);
+  return episodeResponse.json();
+}
+
+export { fetchEpisode, fetchCharacters };

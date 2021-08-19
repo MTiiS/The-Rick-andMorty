@@ -22,7 +22,7 @@ body {
   background: #3C3C3C;
   box-sizing: border-box;
   color: rgba(255, 255, 255, 0.85);
-  height: 70px;
+  height: fit-content;
   text-align: center;
   width: 100%;
   z-index: 1;
@@ -30,15 +30,12 @@ body {
 
 .header__title {
   margin: 0px;
-  padding: 10px;
+  padding: 15px;
 }
 
 .main {
-  position: relative;
-  margin: 0 auto;
-  margin-left: 0px;
-  max-width: 100%;
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
 }
 
 .main_transform {
@@ -48,11 +45,11 @@ body {
 
 .cards {
   margin: 0 auto;
-  margin-top: -105px;
+  margin-top: -50px;
+  margin-left: 35px;
   max-width: 90%;
-  min-height: calc(100vh - 174px);
+  min-height: calc(100vh - 240px);
   display: flex;
-  padding-top: 70px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -359,4 +356,22 @@ cursor: pointer;
   padding: 5px;
   color: rgba(255, 255, 255, 0.6);
   font-size: 11px;
+}
+
+.filter {
+  display: flex;
+  margin: 0 90%;
+}
+
+.filter__button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 5px;
+  padding: 12px;
+  background-image: url(../icons/sort.svg);
+}
+
+.filter__button_reverse{
+  background-image: url(../icons/sort-reverse.svg);
 }

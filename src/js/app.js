@@ -4,6 +4,7 @@ import { initPagination, refreshPagination } from './pagination';
 import { refreshCharacters, getCharacters } from './model/characters.js';
 import { initSearch, createSearchRequest } from "./search.js";
 import { showCardModal } from './cardModal.js';
+import { initSort, sort } from "./filter";
 
 
 initPage();
@@ -23,29 +24,35 @@ function initPage() {
         refreshPagination();
       }
     });
+    initSort({
+      className: ".filter",
+      onSort: function (){
+        renderCards();
+      }
+    });
   });
 }
 
 async function renderPage() {
   showSpinner();
   await refreshCharacters();
-  rendersCards();
+  renderCards();
   hideSpinner();
 }
 
-function rendersCards() {
+function renderCards() {
   let cards = document.querySelector(".cards");
   cards.innerHTML = "";
 
   let characters = getCharacters();
-
+  characters = sort(characters, "name");
   if (characters) {
     for (let character of characters) {
       cards.append( renderCard(character) );
     }
     return true;
   } else { 
-    showCharactersNotFound(); 
+    showCharactersNotFound();
   }
 }
 

@@ -23,16 +23,12 @@ function sort(characters, property) {
 
 function deepClone(input) {
 
-  // primitive types
-  if (typeof (input) != "object") {
+  // primitive types of null
+  if (typeof (input) !== "object" | input === null) {
     return input;
   }
 
-  // null
-  if (!input) {
-    return input;
-  }
-  let result = (Array.isArray(input)) ? [] : {};
+  let result = ( Array.isArray(input) ) ? [] : {};
   for (var property in input) {
     if (input.hasOwnProperty(property)) {
       result[property] = deepClone(input[property]);
@@ -46,12 +42,16 @@ function renderFilter(elementClassName) {
   filterButton.classList.add("filter__button");
   document.querySelector(elementClassName).append(filterButton);
   filterButton.addEventListener("click", () => {
-    reverse = !reverse;
-    if (handleSort){
-    handleSort();
-    }
-    filterButton.classList.toggle("filter__button_reverse")
+    toogleSort(filterButton);
   });
+}
+
+function toogleSort(filterButton) {
+  reverse = !reverse;
+  if (handleSort) {
+    handleSort();
+  }
+  filterButton.classList.toggle("filter__button_reverse");
 }
 
 export { initSort, sort };

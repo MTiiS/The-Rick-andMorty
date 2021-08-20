@@ -12,4 +12,4 @@ function hideSpinner() {
   document.querySelector(".spinner").remove();
 }
 
-export { showSpinner, hideSpinner }
+export { showSpinner, hideSpinner };

@@ -22,20 +22,25 @@ body {
   background: #3C3C3C;
   box-sizing: border-box;
   color: rgba(255, 255, 255, 0.85);
-  height: fit-content;
   text-align: center;
   width: 100%;
   z-index: 1;
 }
 
 .header__title {
-  margin: 0px;
+  display: flex;
+  justify-content: center;
+  word-break: break-word;
   padding: 15px;
+  margin: 0px;
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  margin: 0 auto;
+  margin-left: 0px;
+  max-width: 100%;
+  font-size: 14px;
 }
 
 .main_transform {
@@ -45,20 +50,20 @@ body {
 
 .cards {
   margin: 0 auto;
-  margin-top: -50px;
+  margin-top: -125px;
   margin-left: 35px;
-  max-width: 90%;
-  min-height: calc(100vh - 240px);
+  min-height: calc(100vh - 199px);
   display: flex;
+  padding-top: 70px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .card {
+  display: flex;
   position: relative;
   width: 450px;
   height: 220px;
-  display: flex;
   overflow: hidden;
   background: #3C3C3C;
   border-radius: 0.5rem;
@@ -188,7 +193,7 @@ cursor: pointer;
 }
 
 .pagination__button_disabled {
-  opacity: 0.6;
+  opacity: 0.2;
 }
 
 
@@ -250,14 +255,14 @@ cursor: pointer;
   color: #f3efda;
 }
 
-.form__submit-button {
+.form__button {
   background-color: dimgrey;
   border-color: bisque;
   border-radius: 6px;
   color: black;
 }
 
-.form__submit-button:hover {
+.form__button:hover {
   color: #ddd;
 }
 
@@ -351,7 +356,7 @@ cursor: pointer;
 }
 
 .footer {
-  margin-top: 29px;
+  margin-top: 24px;
   background: #3C3C3C;
   padding: 5px;
   color: rgba(255, 255, 255, 0.6);

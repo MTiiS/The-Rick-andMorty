@@ -31,7 +31,6 @@ function initPagination(config) {
 }
 
 function refreshPagination() {
-
   refreshDisplayedButtons();
   renderPagination();
 }
@@ -51,6 +50,7 @@ function refreshDisplayedButtons() {
   let firstButtonNumber = currentPage;
   
   if (totalPages) {
+
     // if current page < offsetStart rendering always starts from "1" button without offset
     if (currentPage < offsetStart | currentPage < totalButtons) {
       firstButtonNumber = 1;
@@ -77,7 +77,6 @@ function refreshDisplayedButtons() {
     displayedButtons.unshift( new PaginationButton(prevButton.id, prevButton.content, false, isDisabled) );
     isDisabled = currentPage === totalPages;
     displayedButtons.push( new PaginationButton(nextButton.id, nextButton.content, false, isDisabled) );
-
   }
 
   // add buttons to array
@@ -88,7 +87,6 @@ function renderPagination() {
   let displayedButtons = getDisplayedButtons();
   const paginator = document.querySelector(".pagination__buttons");
   paginator.innerHTML = "";
-
 
   if (displayedButtons.length > 0) {
     for (let button of displayedButtons) {
@@ -129,7 +127,7 @@ function addPaginationEvents() {
       }
       window.scrollTo(0, 0);
     }
-  })
+  });
 }
 
 export { initPagination, refreshPagination }

@@ -45,13 +45,13 @@ function renderCards() {
   cards.innerHTML = "";
 
   let characters = getCharacters();
-  characters = sort(characters, "name");
   if (characters) {
+    characters = sort(characters, "name");
     for (let character of characters) {
       cards.append( renderCard(character) );
     }
     return true;
-  } else { 
+  } else {
     showCharactersNotFound();
   }
 }
@@ -137,19 +137,19 @@ function generateStatusMarkClassName(status) {
 function addPageEvents() {
 
   document.querySelector(".cards").addEventListener("click", (e) => {
+
     if (e.target.dataset.status) {
       createSearchRequest('status', e.target.dataset.status);
+      document.querySelector
     } else if (e.target.dataset.gender) {
       createSearchRequest('gender', e.target.dataset.gender);
     }
-  });
 
-    document.querySelector(".cards").addEventListener("click", (e) => {
-      if ( e.target.classList.contains("card__link") ) {
-        let itemID = e.target.closest('[data-id]').getAttribute('data-id');
-        showCardModal(itemID);
-      }
-    });
+    if ( e.target.classList.contains("card__link") ) {
+      let itemID = e.target.closest('[data-id]').getAttribute('data-id');
+      showCardModal(itemID);
+    }
+  });
 }
 
 

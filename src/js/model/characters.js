@@ -27,10 +27,7 @@ function getCharacterById(id) {
 function getCharacterByProperty(propertyName, propertyValue) {
   let characters = getCharacters();
   if (propertyValue) {
-    return characters.find( (character) => {
-      return character[propertyName] === propertyValue
-    });
-
+    return characters.find( (character) => character[propertyName] === propertyValue );
   }
 }
 

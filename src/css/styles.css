@@ -34,6 +34,7 @@
   box-sizing: border-box;
   color: rgba(255, 255, 255, 0.85);
   text-align: center;
+  min-width: 300px;
   width: 100%;
   z-index: 1;
 }
@@ -49,11 +50,11 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
-  
   justify-content: center;
-  margin-top: -53px;
+  margin-top: -68px;
   margin-left: 35px;
   min-height: calc(100vh - 179px);
+  min-width: 250px;
 }
 
 .card {
@@ -190,14 +191,17 @@ cursor: pointer;
   opacity: 0.2;
 }
 
+.buttons {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 105px;
+}
 
 .search-open-button {
   border: none;
-  position: sticky;
-  top: 92px;
   height: 48px;
   width: 48px;
-  display: inherit;
   background-image: url(../icons/search.svg);
   background-color: transparent;
 }
@@ -367,8 +371,10 @@ cursor: pointer;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin-top: 5px;
-  padding: 12px;
+  width: 24px;
+  height: 24px;
+  margin-top: 6px;
+  margin-left: 12px;
   background-image: url(../icons/sort.svg);
 }
 

@@ -25,7 +25,7 @@ function initPage() {
       }
     });
     initSort({
-      className: ".filter",
+      className: ".buttons",
       onSort: function (){
         renderCards();
       }

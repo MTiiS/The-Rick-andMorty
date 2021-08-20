@@ -28,10 +28,15 @@ function deepClone(input) {
     return input;
   }
 
-  let result = ( Array.isArray(input) ) ? [] : {};
-  for (var property in input) {
-    if (input.hasOwnProperty(property)) {
-      result[property] = deepClone(input[property]);
+  let result;
+  if ( Array.isArray(input) ) {
+    return input.map(deepClone);
+  } else {
+    result = {};
+    for (var property in input) {
+      if (input.hasOwnProperty(property)) {
+        result[property] = deepClone(input[property]);
+      }
     }
   }
   return result;

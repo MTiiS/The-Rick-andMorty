@@ -27,21 +27,19 @@ function getCharacterById(id) {
 function getCharacterByProperty(propertyName, propertyValue) {
   let characters = getCharacters();
   if (propertyValue) {
-    return characters.find( (character) => {
-      return character[propertyName] === propertyValue
-    });
-
+    return characters.find( (character) => character[propertyName] === propertyValue );
   }
 }
 
 async function refreshCharacters() {
 
-  setTotalPages(0);
-  setCharacters(null);
+  let totalPages = 0;
+  let characters = null;
 
   let apiData = await fetchCharacters();
   if (apiData && !apiData.error) {
-    let characters = apiData.results.map( (character) => {
+    totalPages = apiData.info.pages;
+    characters = apiData.results.map( (character) => {
       return {
         id: character.id || null,
         image: character.image,
@@ -52,9 +50,9 @@ async function refreshCharacters() {
         episode: character.episode[0] || null
       };
     });
-    setCharacters(characters);
-    setTotalPages(apiData.info.pages);
   }
+  setCharacters(characters);
+  setTotalPages(totalPages);
   return [];
 }
 

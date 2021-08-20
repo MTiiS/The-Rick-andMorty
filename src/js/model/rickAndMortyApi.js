@@ -1,5 +1,5 @@
 import { getCurrentPage } from "./currentPage.js";
-import { getSearchRequest } from "../search.js"
+import { getSearchRequest } from "../search.js";
 
 
 function fetchCharacters() {

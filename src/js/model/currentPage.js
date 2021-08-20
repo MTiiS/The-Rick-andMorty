@@ -12,6 +12,7 @@ function setCurrentPage(pageNumber) {
 }
 
 function switchToPage(pageId) {
+  
   // config
   let PREV_BUTTON = getConfig("PREV_BUTTON");
   let NEXT_BUTTON = getConfig("NEXT_BUTTON");
@@ -30,4 +31,4 @@ function switchToPage(pageId) {
   setCurrentPage(currentPage);
 }
 
-export { getCurrentPage, switchToPage, setCurrentPage }
+export { getCurrentPage, switchToPage, setCurrentPage };

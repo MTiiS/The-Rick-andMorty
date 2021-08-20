@@ -37,7 +37,7 @@ function createSearchRequest(field, value) {
   let form = document.querySelector(".search__form");
   const formData = new FormData(form);
   setCurrentPage(1);
-  
+
   if (field && value) {
     formData.append(field, value);
   }

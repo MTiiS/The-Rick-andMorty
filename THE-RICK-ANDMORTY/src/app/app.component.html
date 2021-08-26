@@ -1,0 +1,19 @@
+  <main class="main">
+
+    <header class="header">
+      <h1 class="header__title">
+        The Rick and Morty
+      </h1>
+    </header>
+    <div class="cards">
+      <app-card 
+        *ngFor="let character of characters"
+        [character] = "character"
+        >
+    </app-card>
+    </div>
+    <app-pagination ></app-pagination>
+    <footer class="footer">
+      <p>MTiS</p>
+    </footer>
+  </main>

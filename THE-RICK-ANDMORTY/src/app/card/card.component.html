@@ -1,0 +1,15 @@
+<div class="card" data-id="1"><img class="card__img" src={{character.image}}>
+  <div class="card__content">
+    <section>
+      <h1 class="card__content-title card__content-title_highlights">{{character.name}}</h1>
+      <p class="card__content-text" attr.data-status={{character.status}}><span
+          class="card__status-mark card__status-mark_{{character.status}}">●</span>status: {{character.status}}</p>
+      <p class="card__content-text" attr.data-gender={{character.gender}}>gender: {{character.gender}}</p>
+    </section>
+    <section>
+      <h4 class="card__content-title card__content-title_highlights">Last known location:</h4>
+      <p class="card__content-text">Earth (Replacement Dimension)</p>
+    </section>
+    <section class="modal__openButton"><a class="card__link" href="#">read more...</a></section>
+  </div>
+</div>

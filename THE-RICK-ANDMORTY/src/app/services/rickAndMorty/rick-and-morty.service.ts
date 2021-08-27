@@ -10,11 +10,15 @@ export class RickAndMortyService {
   constructor(private http: HttpClient, private currentPageService: CurrentPageService) {
   }
 
-  getCharactersFromApi () {
+  getCharactersFromApi() {
     let searchRequest = "";
     let currentPage = this.currentPageService.getCurrentPage();
-    
+
     let url = "https://rickandmortyapi.com/api/character/?page=" + currentPage;
+    return this.http.get(url);
+  }
+
+  async getEpisodeFromApi(url: string) {
     return this.http.get(url);
   }
 }

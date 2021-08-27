@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'THE-RICK-AND-MORTY';
   characters: any = [];
 
-  constructor(private charactersService: CharactersService) {}
+  constructor(private charactersService: CharactersService) { }
 
   async ngAfterViewInit() {
     await this.charactersService.refreshCharacters();

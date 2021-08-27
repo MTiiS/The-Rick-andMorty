@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RickAndMortyService } from '../rickAndMorty/rick-and-morty.service';
-import {BehaviorSubject} from "rxjs";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,20 @@ export class CharactersService {
     return this.characters;
   }
 
+  getCharacterById(id: number) {
+    return this.getCharacterByProperty('id', Number(id));
+  }
+
+  getCharacterByProperty(propertyName: any, propertyValue: any) {
+    let characters: any = [];
+    this.getCharacters().subscribe((val) => {
+      characters = val;
+    });
+    if (propertyValue) {
+      return characters.find((character: any) => character[propertyName] === propertyValue);
+    }
+  }
+
   setTotalPages(pages: number) {
     this.totalPages = pages;
   }
@@ -32,7 +46,6 @@ export class CharactersService {
   }
 
   async refreshCharacters() {
-
     let totalPages: number = 0;
     let characters: Array<object> = [];
     let apiData: any = await this.httpService.getCharactersFromApi().toPromise();
@@ -53,5 +66,11 @@ export class CharactersService {
     this.setCharacters(characters);
     this.setTotalPages(totalPages);
     return [];
+  }
+
+  async setCharacterEpisodeName(character: any) {
+    let url = character.episode;
+    let episode: any = await (await this.httpService.getEpisodeFromApi(url)).toPromise();
+    character['first_seen'] = episode.name;
   }
 }

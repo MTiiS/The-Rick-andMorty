@@ -12,8 +12,8 @@ import { PaginationButton } from './paginationButton';
 
 export class PaginationComponent implements OnInit {
 
-  @Input() button: Array <PaginationButton> = [];
-  displayedButtons: Array <PaginationButton> = [];
+  @Input() button: Array<PaginationButton> = [];
+  displayedButtons: Array<PaginationButton> = [];
 
 
   constructor(private configService: ConfigService,
@@ -25,7 +25,7 @@ export class PaginationComponent implements OnInit {
     this.refreshDisplayedButtons();
   }
 
-  setDisplayedButtons(displayedButtons:  Array <PaginationButton>) {
+  setDisplayedButtons(displayedButtons: Array<PaginationButton>) {
     this.displayedButtons = displayedButtons;
   }
 
@@ -34,9 +34,9 @@ export class PaginationComponent implements OnInit {
   }
 
   refreshDisplayedButtons() {
-    let displayedButtons: Array <PaginationButton> = [];
+    let displayedButtons: Array<PaginationButton> = [];
     let totalPages = this.charactersService.getTotalPages();
-    
+
     // config
     let prevButton = this.configService.getConfig("PREV_BUTTON");
     let nextButton = this.configService.getConfig("NEXT_BUTTON");
@@ -67,7 +67,7 @@ export class PaginationComponent implements OnInit {
       // add page buttons
       for (let i = firstButtonNumber - offsetStep; i <= lastButtonNumber; i++) {
         let isActive = i === currentPage;
-        displayedButtons.push( new PaginationButton(i, String(i), isActive) );
+        displayedButtons.push( new PaginationButton( i, String(i), isActive) );
       }
 
       // add navigation buttons

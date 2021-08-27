@@ -1,0 +1,28 @@
+<ng-container *ngIf="display | async as display">
+<div class="modal" [class.modal_open]="display !== 'close'" (click)="close()" >
+  <div class="modal__content"><img src={{character.image}}>
+    <div class="modal__content-text">
+      <section>
+        <h1>Name:</h1>
+        <p>{{character.name}}</p>
+      </section>
+      <section>
+        <h1>Status: </h1>
+        <p>{{character.status}}</p>
+      </section>
+      <section>
+        <h1>Gender:</h1>
+        <p>{{character.gender}}</p>
+      </section>
+      <section>
+        <h1>Location:</h1>
+        <p>{{character.location}}</p>
+      </section>
+      <section>
+        <h1>First_seen:</h1>
+        <p>{{character.first_seen}}</p>
+      </section>
+    </div><span class="modal__close-button">×</span>
+  </div>
+</div>
+</ng-container>

@@ -2,9 +2,10 @@
   <div class="card__content">
     <section>
       <h1 class="card__content-title card__content-title_highlights">{{character.name}}</h1>
-      <p class="card__content-text" attr.data-status={{character.status}}><span
+      <p class="card__content-text" attr.data-status={{character.status}} (click)="searchCharacters($event)"><span
           class="card__status-mark card__status-mark_{{character.status}}">●</span>status: {{character.status}}</p>
-      <p class="card__content-text" attr.data-gender={{character.gender}}>gender: {{character.gender}}</p>
+      <p class="card__content-text" attr.data-gender={{character.gender}} (click)="searchCharacters($event)">
+        gender:{{character.gender}}</p>
     </section>
     <section>
       <h4 class="card__content-title card__content-title_highlights">Last known location:</h4>

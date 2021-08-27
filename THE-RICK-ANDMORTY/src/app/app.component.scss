@@ -16,6 +16,11 @@ $titleColor: rgba(255, 255, 255, 0.85);
   font-size: 14px;
 }
 
+.main_transform {
+  transition: margin-left 0.4s;
+  margin-left: 265px;
+}
+
 .header {
   position: sticky;
   top: 0;
@@ -35,6 +40,21 @@ $titleColor: rgba(255, 255, 255, 0.85);
   word-break: break-word;
   padding: 15px;
   margin: 0px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 110px;
+}
+
+.search-open-button {
+  border: none;
+  height: 48px;
+  width: 48px;
+  background-image: url(../assets/icons/search.svg);
+  background-color: transparent;
 }
 
 .cards {

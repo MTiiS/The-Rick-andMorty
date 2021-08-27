@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '../services/config.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CurrentPageService {
+export class PaginationService {
 
   constructor(private configService: ConfigService) { }
-
 
   firstPage = this.configService.getConfig("FIRST_LOAD_PAGE");
   currentPage = this.firstPage;

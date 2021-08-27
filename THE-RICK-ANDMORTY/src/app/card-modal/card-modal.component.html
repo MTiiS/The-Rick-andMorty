@@ -1,0 +1,26 @@
+<div *ngIf="character" class="modal modal_open">
+  <div class="modal__content"><img src={{character.image}}>
+    <div class="modal__content-text">
+      <section>
+        <h1>Name:</h1>
+        <p>{{character.name}}</p>
+      </section>
+      <section>
+        <h1>Status: </h1>
+        <p>{{character.status}}</p>
+      </section>
+      <section>
+        <h1>Gender:</h1>
+        <p>{{character.gender}}</p>
+      </section>
+      <section>
+        <h1>Location:</h1>
+        <p>{{character.location.name}}</p>
+      </section>
+      <section>
+        <h1>First seen:</h1>
+        <p> {{character.firstSeen}}</p>
+      </section>
+    </div><span class="modal__close-button" (click)="closeModal()">×</span>
+  </div>
+</div>

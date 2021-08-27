@@ -1,26 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
-import { RickAndMortyService } from './services/rickAndMorty/rick-and-morty.service';
-import { CharactersService } from './services/character/characters.service';
-import { ConfigService } from './services/config/config.service';
-import { CurrentPageService } from './services/currentPage/current-page.service';
-
+import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { CardModalComponent } from './card-modal/card-modal.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
-    PaginationComponent
+    PaginationComponent,
+    CardModalComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [RickAndMortyService, CharactersService, ConfigService, CurrentPageService],
+
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

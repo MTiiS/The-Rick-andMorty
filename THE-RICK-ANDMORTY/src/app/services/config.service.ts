@@ -7,7 +7,6 @@ export class ConfigService {
 
   constructor() { }
 
-
   CONFIG: any = {
     TOTAL_PAGES: 34,
     TOTAL_PAGIN_BUTTONS: 6,

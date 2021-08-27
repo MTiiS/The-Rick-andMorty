@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ConfigService } from '../services/config/config.service';
-import { CharactersService } from '../services/character/characters.service';
-import { CurrentPageService } from '../services/currentPage/current-page.service';
+import { Component, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
+import { ConfigService } from '../services/config.service';
+import { PaginationService } from './pagination.service';
 import { PaginationButton } from './paginationButton';
 
 @Component({
@@ -10,22 +9,25 @@ import { PaginationButton } from './paginationButton';
   styleUrls: ['./pagination.component.scss']
 })
 
-export class PaginationComponent implements OnInit {
+export class PaginationComponent {
 
-  @Input() button: Array <PaginationButton> = [];
-  displayedButtons: Array <PaginationButton> = [];
+  @Output() onPageChanged = new EventEmitter();
+  @Input() totalPages: number = 0;
+  displayedButtons: Array<PaginationButton> = [];
 
+  constructor(
+    private configService: ConfigService,
+    private paginationService: PaginationService
+  ) { }
 
-  constructor(private configService: ConfigService,
-    private charactersService: CharactersService,
-    private currentPageService: CurrentPageService) { }
-
-  async ngOnInit() {
-    await this.charactersService.refreshCharacters();
-    this.refreshDisplayedButtons();
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes.totalPages?.currentValue)
+    if (changes.totalPages?.currentValue) {
+      this.refreshDisplayedButtons();
+    }
   }
 
-  setDisplayedButtons(displayedButtons:  Array <PaginationButton>) {
+  setDisplayedButtons(displayedButtons: Array<PaginationButton>) {
     this.displayedButtons = displayedButtons;
   }
 
@@ -34,9 +36,10 @@ export class PaginationComponent implements OnInit {
   }
 
   refreshDisplayedButtons() {
-    let displayedButtons: Array <PaginationButton> = [];
-    let totalPages = this.charactersService.getTotalPages();
-    
+    this.totalPages = 56;
+    let displayedButtons: Array<PaginationButton> = [];
+    let totalPages = this.totalPages;
+
     // config
     let prevButton = this.configService.getConfig("PREV_BUTTON");
     let nextButton = this.configService.getConfig("NEXT_BUTTON");
@@ -45,7 +48,7 @@ export class PaginationComponent implements OnInit {
     let offsetStep = this.configService.getConfig("OFFSET_STEP");
     let firstPage = this.configService.getConfig("FIRST_LOAD_PAGE");
 
-    let currentPage = this.currentPageService.getCurrentPage();
+    let currentPage = this.paginationService.getCurrentPage();
     let firstButtonNumber = currentPage;
 
     if (totalPages) {
@@ -67,7 +70,7 @@ export class PaginationComponent implements OnInit {
       // add page buttons
       for (let i = firstButtonNumber - offsetStep; i <= lastButtonNumber; i++) {
         let isActive = i === currentPage;
-        displayedButtons.push( new PaginationButton(i, String(i), isActive) );
+        displayedButtons.push(new PaginationButton( String(i), String(i), isActive) );
       }
 
       // add navigation buttons
@@ -82,12 +85,11 @@ export class PaginationComponent implements OnInit {
     this.setDisplayedButtons(displayedButtons);
   }
 
-  addPaginationEvents(e: any) {
-    if (!e.target.classList.contains( "pagination__button_disabled") ) {
-      let pageId = e.target.getAttribute('data-id');
-      this.currentPageService.switchToPage(pageId);
+  onPaginationClick(e: any, button: PaginationButton) {
+    if (!button.isDisabled && !button.isActive) {
+      this.paginationService.switchToPage(button.id);
       this.refreshDisplayedButtons();
-      this.charactersService.refreshCharacters();
+      this.onPageChanged.emit();
     }
   }
 }

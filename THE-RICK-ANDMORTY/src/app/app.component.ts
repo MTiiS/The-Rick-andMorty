@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { CharactersService } from './services/character/characters.service';
+import { CharactersService } from './services/characters.service';
+import { Character } from './services/character.interface';
+
 
 @Component({
   selector: 'app-root',
@@ -8,15 +10,33 @@ import { CharactersService } from './services/character/characters.service';
 })
 export class AppComponent {
 
-  title = 'THE-RICK-AND-MORTY';
-  characters: any = [];
+  title = 'The Rick and Morty';
+  characters: Character[] = [];
+  selectedCharacter: Character | null = null;
+  modalIsClosed?: boolean;
+  totalPages: number = 0;
 
-  constructor(private charactersService: CharactersService) {}
+  constructor(private charactersService: CharactersService) { }
 
-  async ngAfterViewInit() {
-    await this.charactersService.refreshCharacters();
-    this.charactersService.getCharacters().subscribe( (val) => {
-      this.characters = val;
-    });
+  ngOnInit() {
+    this.renderCharacters();
+  }
+
+  onPaginationChanged() {
+    this.renderCharacters();
+  }
+
+  async renderCharacters() {
+    this.characters = await this.charactersService.refreshCharacters();
+    this.totalPages = this.charactersService.getTotalPages();
+  }
+
+  setSelectedCharacter(character: Character) {
+    this.selectedCharacter = character;
+    this.modalIsClosed = false;
+  }
+
+  onCloseModal() {
+    this.selectedCharacter = null;
   }
 }

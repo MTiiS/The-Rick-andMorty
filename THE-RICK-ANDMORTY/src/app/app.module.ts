@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SortComponent } from './sort/sort.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
     PaginationComponent,
-    SortComponent
+    SortComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

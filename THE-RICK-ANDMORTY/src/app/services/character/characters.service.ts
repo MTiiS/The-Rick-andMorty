@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { RickAndMortyService } from '../rickAndMorty/rick-and-morty.service';
 import {BehaviorSubject} from "rxjs";
+import { AppLockService } from 'src/app/spinner/app-lock.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharactersService {
 
-  constructor(private httpService: RickAndMortyService) {
+  constructor(private httpService: RickAndMortyService, private appLock: AppLockService) {
   }
 
   title = 'THE-RICK-ANDMORTY';
 
-  characters: BehaviorSubject<object> = new BehaviorSubject<object>({});
-  totalPages: number = 0;
+  private characters: BehaviorSubject<object> = new BehaviorSubject<object>({});
+  private totalPages: number = 0;
 
   setCharacters(characters: Array<object>) {
     this.characters.next(characters);
@@ -32,7 +33,7 @@ export class CharactersService {
   }
 
   async refreshCharacters() {
-
+    this.appLock.setIsLocked(true);
     let totalPages: number = 0;
     let characters: Array<object> = [];
     let apiData: any = await this.httpService.getCharactersFromApi().toPromise();
@@ -52,6 +53,7 @@ export class CharactersService {
     }
     this.setCharacters(characters);
     this.setTotalPages(totalPages);
+    this.appLock.setIsLocked(false);
     return [];
   }
 }

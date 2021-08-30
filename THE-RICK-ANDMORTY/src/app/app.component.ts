@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CharactersService } from './services/character/characters.service';
 import { SortService } from './sort/sort.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,9 +13,12 @@ export class AppComponent {
   title = 'THE-RICK-AND-MORTY';
   characters: any = [];
 
-  constructor(private charactersService: CharactersService, private sortService: SortService ) {}
+  constructor(
+    private charactersService: CharactersService,
+    private sortService: SortService,
+  ) { }
 
-  async ngAfterViewInit() {
+  async ngOnInit() {
     await this.charactersService.refreshCharacters();
     this.charactersService.getCharacters().subscribe( (val) => {
       this.characters = val;

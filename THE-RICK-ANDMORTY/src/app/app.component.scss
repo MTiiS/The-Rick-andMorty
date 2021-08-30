@@ -37,6 +37,12 @@ $titleColor: rgba(255, 255, 255, 0.85);
   margin: 0px;
 }
 
+.buttons {
+  display: flex;
+  position: sticky;
+  top: 105px;
+}
+
 .cards {
   display: flex;
   flex: 1;

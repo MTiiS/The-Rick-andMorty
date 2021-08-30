@@ -9,12 +9,14 @@ import { CurrentPageService } from './services/currentPage/current-page.service'
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { SortComponent } from './sort/sort.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
-    PaginationComponent
+    PaginationComponent,
+    SortComponent
   ],
   imports: [
     BrowserModule,

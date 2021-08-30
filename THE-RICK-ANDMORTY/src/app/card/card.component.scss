@@ -68,3 +68,10 @@ $mainColor: #3C3C3C;
   color: #23D18B;
   font-size: 20px;
 }
+
+@media (max-width: 753px) {
+  .card {
+    max-width: 220px;
+    flex-direction: column;
+  }
+}

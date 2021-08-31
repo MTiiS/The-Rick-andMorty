@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CharactersService } from './services/character/characters.service';
-import { SortService } from './sort/sort.service';
+import { SortService } from './sort/sort.service'
+
 
 @Component({
   selector: 'app-root',
@@ -9,16 +11,15 @@ import { SortService } from './sort/sort.service';
 })
 export class AppComponent {
 
-  title = 'THE-RICK-AND-MORTY';
-  characters: any = [];
+  title = 'THE RICK AND MORTY';
+  characters: Observable< Array<object> > = new Observable;
 
-  constructor(private charactersService: CharactersService, private sortService: SortService ) {}
+  constructor(
+    private charactersService: CharactersService,
+    public sortService: SortService
+  ) { }
 
-  async ngAfterViewInit() {
-    await this.charactersService.refreshCharacters();
-    this.charactersService.getCharacters().subscribe( (val) => {
-      this.characters = val;
-      this.characters = this.sortService.sort(this.characters, 'name');
-    });
+  async ngOnInit() {
+    this.characters = this.charactersService.getCharacters();
   }
 }

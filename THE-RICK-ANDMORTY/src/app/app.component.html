@@ -1,15 +1,15 @@
 <main class="main">
-
   <header class="header">
     <h1 class="header__title">
-      The Rick and Morty
+      {{title}}
     </h1>
   </header>
   <div class="buttons">
     <app-sort></app-sort>
   </div>
   <div class="cards">
-    <app-card *ngFor="let character of characters" [character]="character">
+    <app-card *ngFor="let character of characters | async | sort:'name': sortService.sortReverse "
+      [character]="character">
     </app-card>
   </div>
   <app-pagination></app-pagination>

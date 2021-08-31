@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RickAndMortyService } from '../rickAndMorty/rick-and-morty.service';
-import {BehaviorSubject} from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,35 +10,32 @@ export class CharactersService {
   constructor(private httpService: RickAndMortyService) {
   }
 
-  title = 'THE-RICK-ANDMORTY';
+  private characters: BehaviorSubject<object> = new BehaviorSubject<object>({});
+  private totalPages: number = 0;
 
-  characters: BehaviorSubject<object> = new BehaviorSubject<object>({});
-  totalPages: number = 0;
-
-  setCharacters(characters: Array<object>) {
+  setCharacters(characters: Array<object>): void {
     this.characters.next(characters);
   }
 
-  getCharacters() {
-    return this.characters;
+  getCharacters(): Observable<Array<object>> {
+    return this.characters as Observable<Array<object>>;
   }
 
-  setTotalPages(pages: number) {
+  setTotalPages(pages: number): void {
     this.totalPages = pages;
   }
 
-  getTotalPages() {
+  getTotalPages(): number {
     return this.totalPages;
   }
 
   async refreshCharacters() {
-
     let totalPages: number = 0;
     let characters: Array<object> = [];
     let apiData: any = await this.httpService.getCharactersFromApi().toPromise();
     if (apiData && !apiData.error) {
       totalPages = apiData.info.pages;
-      characters = apiData.results.map((character: any) => {
+      characters = apiData.results.map( (character: any) => {
         return {
           id: character.id || null,
           image: character.image,

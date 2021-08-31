@@ -12,15 +12,15 @@ export class CurrentPageService {
   firstPage = this.configService.getConfig("FIRST_LOAD_PAGE");
   currentPage = this.firstPage;
 
-  getCurrentPage() {
+  getCurrentPage(): number {
     return this.currentPage;
   }
 
-  setCurrentPage(pageNumber: number) {
+  setCurrentPage(pageNumber: number): void {
     this.currentPage = pageNumber;
   }
 
-  switchToPage(pageId: string) {
+  switchToPage(pageId: string): void {
 
     // config
     let PREV_BUTTON = this.configService.getConfig("PREV_BUTTON");

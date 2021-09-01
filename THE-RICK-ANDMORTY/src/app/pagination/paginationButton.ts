@@ -1,9 +1,9 @@
 export class PaginationButton {
 
-id: number;
-text;
-isActive;
-isDisabled;
+  id: number;
+  text;
+  isActive;
+  isDisabled;
 
   constructor(id: number, text: string, isActive = false, isDisabled = false) {
     this.id = id;

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { CharactersService } from './services/character/characters.service';
+import { CharactersService } from './services/characters.service';
+import { Character } from './character';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +10,12 @@ import { CharactersService } from './services/character/characters.service';
 })
 export class AppComponent {
 
-  title = 'THE-RICK-AND-MORTY';
-  characters: any = [];
+  title = 'The Rick and Morty';
+  characters: Observable<Character[]> = new Observable;
 
-  constructor(private charactersService: CharactersService) {}
+  constructor(private charactersService: CharactersService) { }
 
-  async ngAfterViewInit() {
-    await this.charactersService.refreshCharacters();
-    this.charactersService.getCharacters().subscribe( (val) => {
-      this.characters = val;
-    });
+  ngOnInit() {
+    this.characters = this.charactersService.getCharacters();
   }
 }

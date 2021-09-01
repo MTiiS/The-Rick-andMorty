@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ConfigService } from '../services/config/config.service';
-import { CharactersService } from '../services/character/characters.service';
-import { CurrentPageService } from '../services/currentPage/current-page.service';
+import { ConfigService } from '../services/config.service';
+import { CharactersService } from '../services/characters.service';
+import { CurrentPageService } from '../services/current-page.service';
 import { PaginationButton } from './paginationButton';
 
 @Component({

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { CharactersService } from '../services/characters.service';
 import { CurrentPageService } from '../services/current-page.service';
@@ -12,7 +12,7 @@ import { PaginationButton } from './paginationButton';
 
 export class PaginationComponent implements OnInit {
 
-  @Input() button: Array <PaginationButton> = [];
+  @Output() onChange = new EventEmitter();
   displayedButtons: Array <PaginationButton> = [];
 
 
@@ -87,7 +87,7 @@ export class PaginationComponent implements OnInit {
       let pageId = e.target.getAttribute('data-id');
       this.currentPageService.switchToPage(pageId);
       this.refreshDisplayedButtons();
-      this.charactersService.refreshCharacters();
+      this.onChange.emit();
     }
   }
 }

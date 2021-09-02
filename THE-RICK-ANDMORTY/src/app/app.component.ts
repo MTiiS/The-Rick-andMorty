@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CharactersService } from './services/characters.service';
-import { Character } from './character';
-import { Observable } from 'rxjs';
+import { Character } from './services/character.interface';
+
 
 @Component({
   selector: 'app-root',
@@ -11,11 +11,19 @@ import { Observable } from 'rxjs';
 export class AppComponent {
 
   title = 'The Rick and Morty';
-  characters: Observable<Character[]> = new Observable;
+  characters?: Character[];
 
   constructor(private charactersService: CharactersService) { }
 
   ngOnInit() {
-    this.characters = this.charactersService.getCharacters();
+    this.getCharacters();
+  }
+
+  onPaginationChanged() {
+    this.getCharacters();
+  }
+
+  async getCharacters() {
+    this.characters = await this.charactersService.refreshCharacters();
   }
 }

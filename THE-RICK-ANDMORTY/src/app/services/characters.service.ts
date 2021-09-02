@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RickAndMortyService } from './rick-and-morty.service';
-import { Subject, Observable } from "rxjs";
-import { Character } from '../character'
-import { ApiData } from '../apiData';
+import { Character } from './character.interface'
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +11,15 @@ export class CharactersService {
   constructor(private httpService: RickAndMortyService) {
   }
 
-  private characters: Subject<Character[]> = new Subject;
+  private characters: Character[] = [];
   private totalPages: number = 0;
 
   setCharacters(characters: Character[]): void {
-    this.characters.next(characters);
+    this.characters = characters;
   }
 
-  getCharacters(): Observable<Character[]> {
-    return this.characters as Observable<Character[]>;
+  getCharacters(): Character[] {
+    return this.characters
   }
 
   setTotalPages(pages: number): void {
@@ -34,13 +33,13 @@ export class CharactersService {
   async refreshCharacters() {
     let totalPages: number = 0;
     let characters: Character[] = [];
-    let apiData: ApiData = await this.httpService.getCharactersFromApi().toPromise();
+    let apiData: any = await this.httpService.getCharactersFromApi();
     if (apiData && !apiData.error) {
       totalPages = apiData.info.pages;
       characters = apiData.results.map( (character: Character) => character );
     }
     this.setCharacters(characters);
     this.setTotalPages(totalPages);
-    return [];
+    return characters;
   }
 }

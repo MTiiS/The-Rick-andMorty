@@ -11,19 +11,21 @@ import { Character } from './services/character.interface';
 export class AppComponent {
 
   title = 'The Rick and Morty';
-  characters?: Character[];
+  characters: Character[] = [];
+  totalPages: number = 0;
 
   constructor(private charactersService: CharactersService) { }
 
   ngOnInit() {
-    this.getCharacters();
+    this.renderCharacters();
   }
 
   onPaginationChanged() {
-    this.getCharacters();
+    this.renderCharacters();
   }
 
-  async getCharacters() {
+  async renderCharacters() {
     this.characters = await this.charactersService.refreshCharacters();
+    this.totalPages = this.charactersService.getTotalPages();
   }
 }

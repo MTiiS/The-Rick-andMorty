@@ -1,14 +1,9 @@
 export class PaginationButton {
 
-  id: number;
-  text: String;
-  isActive: boolean;
-  isDisabled: boolean;
-
-  constructor(id: number, text: string, isActive = false, isDisabled = false) {
-    this.id = id;
-    this.text = text;
-    this.isActive = isActive;
-    this.isDisabled = isDisabled;
-  }
+  constructor (
+    public id: string,
+    public text: string,
+    public isActive = false,
+    public isDisabled = false,
+  ) { }
 }

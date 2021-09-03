@@ -8,8 +8,7 @@ import { Character } from './character.interface'
 })
 export class CharactersService {
 
-  constructor(private httpService: RickAndMortyService) {
-  }
+  constructor(private httpService: RickAndMortyService) {}
 
   private characters: Character[] = [];
   private totalPages: number = 0;

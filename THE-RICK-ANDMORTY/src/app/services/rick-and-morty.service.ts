@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { CurrentPageService } from './current-page.service';
+import { PaginationService } from '../pagination/pagination.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +8,11 @@ import { CurrentPageService } from './current-page.service';
 
 export class RickAndMortyService {
 
-  constructor(private http: HttpClient, private currentPageService: CurrentPageService) {
+  constructor(private http: HttpClient, private paginationService: PaginationService) {
   }
 
   getCharactersFromApi(): Promise<any> {
-    let currentPage = this.currentPageService.getCurrentPage();
+    let currentPage = this.paginationService.getCurrentPage();
 
     let url = "https://rickandmortyapi.com/api/character/?page=" + currentPage;
     return this.http.get(url).toPromise();

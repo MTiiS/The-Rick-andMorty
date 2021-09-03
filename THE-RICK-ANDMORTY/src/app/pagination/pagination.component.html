@@ -1,7 +1,7 @@
 <ul class="pagination__buttons">
 
-  <li *ngFor="let button of displayedButtons" [attr.data-id]=button.id (click)="addPaginationEvents($event)"
-    [ngClass]={pagination__button:true,pagination__button_active:button.isActive,pagination__button_disabled:button.isDisabled}>
+  <li *ngFor="let button of displayedButtons" (click)="onPaginationClick($event, button)"
+    [ngClass]="{pagination__button:true,pagination__button_active:button.isActive,pagination__button_disabled:button.isDisabled}">
     {{button.text}}
   </li>
 </ul>

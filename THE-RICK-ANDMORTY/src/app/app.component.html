@@ -11,7 +11,7 @@
     <app-card *ngFor="let character of characters" [character]="character">
     </app-card>
   </div>
-  <app-pagination (onChange)="onPaginationChanged()"></app-pagination>
+  <app-pagination [totalPages]="totalPages" (onChange)="onPaginationChanged()"></app-pagination>
   <footer class="footer">
     <p>MTiS</p>
   </footer>

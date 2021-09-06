@@ -1,0 +1,61 @@
+$mainColor: #3C3C3C;
+$titleColor: rgba(255, 255, 255, 0.85);
+
+@font-face {
+  font-family: "OtomanopeeOne-Regular";
+  src: url("../assets/fonts/OtomanopeeOne-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+.main {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  text-align: center;
+  font-size: 14px;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  padding-left: 35px;
+  background: $mainColor;
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.781);
+  text-align: center;
+  min-width: 300px;
+  width: 100%;
+  z-index: 1;
+}
+
+.header__title {
+  display: flex;
+  justify-content: center;
+  word-break: break-word;
+  padding: 15px;
+  margin: 0px;
+}
+
+.buttons {
+  display: flex;
+  position: sticky;
+  top: 105px;
+}
+
+.cards {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 35px;
+  min-width: 250px;
+}
+
+.footer {
+  margin-top: 24px;
+  background: $mainColor;
+  padding: 5px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+}

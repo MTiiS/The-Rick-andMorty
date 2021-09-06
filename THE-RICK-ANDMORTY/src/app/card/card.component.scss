@@ -1,0 +1,77 @@
+$main-color: #3C3C3C;
+
+.card {
+  display: flex;
+  width: 450px;
+  word-break: break-word;
+  background: $main-color;
+  border-radius: 0.5rem;
+  margin: 0.75rem;
+  border: 1px solid black;
+}
+
+.card:hover {
+  transform: scale(1.005);
+  box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px, rgba(0, 0, 0, 0.18) 0px 4px 11px;
+  transition: all .3s ease-in-out;
+}
+
+.card__img {
+  width: 220px;
+  height: 220px;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  text-align: left;
+  justify-content: space-evenly;
+  padding-left: 10px;
+}
+
+.card__content-title {
+  margin: 0px;
+}
+
+.card__content-text {
+  padding-left: 10px;
+  margin: 0px;
+  height: min-content;
+  cursor: pointer;
+}
+
+.card__content-text:hover {
+  height: min-content;
+  color: #d4b45b;
+}
+
+.card__content-title_highlights {
+  color: #eeeefa;
+}
+
+.card__link {
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+}
+
+.card__status-mark {
+  margin-right: 5px;
+}
+
+.card__status-mark_dead {
+  color: tomato;
+  font-size: 20px;
+}
+
+.card__status-mark_alive {
+  color: #23D18B;
+  font-size: 20px;
+}
+
+@media (max-width: 753px) {
+  .card {
+    max-width: 220px;
+    flex-direction: column;
+  }
+}

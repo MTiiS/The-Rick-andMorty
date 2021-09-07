@@ -12,6 +12,8 @@
       <h4 class="card__content-title card__content-title_highlights">Last known location:</h4>
       <p class="card__content-text">{{character.location.name}}</p>
     </section>
-    <section class="modal__openButton"><a class="card__link" href="#">read more...</a></section>
+    <section class="modal__openButton">
+      <a class="card__link" href="#" (click)="setSelectedCharacter(character)">read more...</a>
+    </section>
   </div>
 </div>

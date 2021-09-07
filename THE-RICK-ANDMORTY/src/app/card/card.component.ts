@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import { Character } from '../services/character.interface';
 
 @Component({
@@ -6,7 +6,14 @@ import { Character } from '../services/character.interface';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent {
 
+export class CardComponent {
   @Input() character?: Character;
+  @Output() onModalOpen: EventEmitter<Character> = new EventEmitter<Character>();
+
+  constructor() { }
+
+  setSelectedCharacter(character: Character) {
+    this.onModalOpen.emit(character)
+  }
 }

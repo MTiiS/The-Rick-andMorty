@@ -4,6 +4,7 @@ export interface Character {
   name: string;
   status: string;
   gender: string;
-  location: {name: string};
+  location: { name: string };
   episode: Array<string>;
+  firstSeen: string;
 }

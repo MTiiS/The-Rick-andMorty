@@ -12,6 +12,8 @@ export class AppComponent {
 
   title = 'The Rick and Morty';
   characters: Character[] = [];
+  selectedCharacter: Character | null = null;
+  modalIsClosed?: boolean;
   totalPages: number = 0;
 
   constructor(private charactersService: CharactersService) { }
@@ -27,5 +29,14 @@ export class AppComponent {
   async renderCharacters() {
     this.characters = await this.charactersService.refreshCharacters();
     this.totalPages = this.charactersService.getTotalPages();
+  }
+
+  setSelectedCharacter(character: Character) {
+    this.selectedCharacter = character;
+    this.modalIsClosed = false;
+  }
+
+  onCloseModal() {
+    this.selectedCharacter = null;
   }
 }

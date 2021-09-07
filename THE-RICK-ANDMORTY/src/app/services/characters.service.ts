@@ -21,6 +21,15 @@ export class CharactersService {
     return this.characters
   }
 
+  getCharacterById(id: number) {
+    return this.getCharacterByProperty( 'id', Number(id) );
+  }
+
+  getCharacterByProperty(propertyName: any, propertyValue: any) {
+    let characters = this.getCharacters();
+    return characters.find( (character: any) => character[propertyName] === propertyValue );
+  }
+
   setTotalPages(pages: number): void {
     this.totalPages = pages;
   }
@@ -40,5 +49,11 @@ export class CharactersService {
     this.setCharacters(characters);
     this.setTotalPages(totalPages);
     return characters;
+  }
+
+  async setCharacterEpisodeName(character: Character) {
+    let url = character.episode[0];
+    let episode: any = await this.httpService.getEpisodeFromApi(url);
+    character.firstSeen = episode.name;
   }
 }

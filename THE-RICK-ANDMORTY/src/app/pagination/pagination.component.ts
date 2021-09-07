@@ -36,7 +36,6 @@ export class PaginationComponent {
   }
 
   refreshDisplayedButtons() {
-    this.totalPages = 56;
     let displayedButtons: Array<PaginationButton> = [];
     let totalPages = this.totalPages;
 

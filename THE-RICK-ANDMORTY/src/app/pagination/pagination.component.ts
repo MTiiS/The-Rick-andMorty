@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter } from '@angular/core';
+import { Component, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { PaginationService } from './pagination.service';
 import { PaginationButton } from './paginationButton';
@@ -11,8 +11,8 @@ import { PaginationButton } from './paginationButton';
 
 export class PaginationComponent {
 
+  @Output() onChanged = new EventEmitter();
   @Input() totalPages: number = 0;
-  @Output() onChange = new EventEmitter();
   displayedButtons: Array<PaginationButton> = [];
 
   constructor(
@@ -20,8 +20,9 @@ export class PaginationComponent {
     private paginationService: PaginationService
   ) { }
 
-  ngOnChanges() {
-    if (this.totalPages) {
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes.totalPages?.currentValue)
+    if (changes.totalPages?.currentValue) {
       this.refreshDisplayedButtons();
     }
   }
@@ -83,11 +84,11 @@ export class PaginationComponent {
     this.setDisplayedButtons(displayedButtons);
   }
 
-  onPaginationClick(e: any, button: PaginationButton) {
+  onClick(button: PaginationButton) {
     if (!button.isDisabled && !button.isActive) {
       this.paginationService.switchToPage(button.id);
       this.refreshDisplayedButtons();
-      this.onChange.emit();
+      this.onChanged.emit();
     }
   }
 }

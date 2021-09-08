@@ -4,6 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
@@ -11,10 +12,11 @@ import { PaginationComponent } from './pagination/pagination.component';
     AppComponent,
     CardComponent,
     PaginationComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

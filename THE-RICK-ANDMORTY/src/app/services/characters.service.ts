@@ -8,7 +8,7 @@ import { Character } from './character.interface'
 })
 export class CharactersService {
 
-  constructor(private httpService: RickAndMortyService) {}
+  constructor(private rickAndMortyService: RickAndMortyService) {}
 
   private characters: Character[] = [];
   private totalPages: number = 0;
@@ -41,7 +41,7 @@ export class CharactersService {
   async refreshCharacters() {
     let totalPages: number = 0;
     let characters: Character[] = [];
-    let apiData: any = await this.httpService.getCharactersFromApi();
+    let apiData: any = await this.rickAndMortyService.getCharacters();
     if (apiData && !apiData.error) {
       totalPages = apiData.info.pages;
       characters = apiData.results.map( (character: Character) => character );
@@ -53,7 +53,7 @@ export class CharactersService {
 
   async setCharacterEpisodeName(character: Character) {
     let url = character.episode[0];
-    let episode: any = await this.httpService.getEpisodeFromApi(url);
-    character.firstSeen = episode.name;
+    let episode: any = await this.rickAndMortyService.getEpisode(url);
+    return {...character, firstSeen: episode.name}
   }
 }

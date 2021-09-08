@@ -8,11 +8,10 @@
   <div class="buttons">
   </div>
   <div class="cards">
-    <app-card (onModalOpen)="setSelectedCharacter(character)" *ngFor="let character of characters" [character]="character">
+    <app-card (openModal)="openModal(character)" *ngFor="let character of characters" [character]="character">
     </app-card>
-    <app-card-modal (onClose)="onCloseModal()" [character]="selectedCharacter"></app-card-modal>
   </div>
-  <app-pagination [totalPages]="totalPages" (onPageChanged)="onPaginationChanged()"></app-pagination>
+  <app-pagination [totalPages]="totalPages" (onChanged)="onPaginationChanged()"></app-pagination>
   <footer class="footer">
     <p>MTiS</p>
   </footer>

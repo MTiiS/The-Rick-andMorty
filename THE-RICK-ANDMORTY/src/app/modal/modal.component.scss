@@ -19,6 +19,7 @@
 
 .modal__content {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   font-size: 10px;
   background: white;
@@ -27,11 +28,6 @@
   border: 1px solid #888;
   width: 80%;
   max-width: 700px;
-}
-
-.modal__content-text {
-  text-align: left;
-  width: 45%;
 }
 
 .modal__close-button {

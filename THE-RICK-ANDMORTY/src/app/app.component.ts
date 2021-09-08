@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { CharactersService } from './services/characters.service';
 import { Character } from './services/character.interface';
+import { ModalService } from './modal/modal.service';
 
 
 @Component({
@@ -16,7 +17,9 @@ export class AppComponent {
   modalIsClosed?: boolean;
   totalPages: number = 0;
 
-  constructor(private charactersService: CharactersService) { }
+  constructor(private charactersService: CharactersService,
+    private viewContainerRef: ViewContainerRef,
+    private modalService: ModalService) { }
 
   ngOnInit() {
     this.renderCharacters();
@@ -31,12 +34,8 @@ export class AppComponent {
     this.totalPages = this.charactersService.getTotalPages();
   }
 
-  setSelectedCharacter(character: Character) {
-    this.selectedCharacter = character;
-    this.modalIsClosed = false;
-  }
-
-  onCloseModal() {
-    this.selectedCharacter = null;
+  openModal(character: Character) {
+    this.modalService.setRootViewContainerRef(this.viewContainerRef);
+    this.modalService.addDynamicComponent(character);
   }
 }

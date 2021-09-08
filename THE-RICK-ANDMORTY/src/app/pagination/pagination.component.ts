@@ -11,7 +11,7 @@ import { PaginationButton } from './paginationButton';
 
 export class PaginationComponent {
 
-  @Output() onPageChanged = new EventEmitter();
+  @Output() onChanged = new EventEmitter();
   @Input() totalPages: number = 0;
   displayedButtons: Array<PaginationButton> = [];
 
@@ -84,11 +84,11 @@ export class PaginationComponent {
     this.setDisplayedButtons(displayedButtons);
   }
 
-  onPaginationClick(e: any, button: PaginationButton) {
+  onClick(button: PaginationButton) {
     if (!button.isDisabled && !button.isActive) {
       this.paginationService.switchToPage(button.id);
       this.refreshDisplayedButtons();
-      this.onPageChanged.emit();
+      this.onChanged.emit();
     }
   }
 }

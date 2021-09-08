@@ -9,11 +9,11 @@ import { Character } from '../services/character.interface';
 
 export class CardComponent {
   @Input() character?: Character;
-  @Output() onModalOpen: EventEmitter<Character> = new EventEmitter<Character>();
+  @Output() openModal: EventEmitter<Character> = new EventEmitter<Character>();
 
   constructor() { }
 
   setSelectedCharacter(character: Character) {
-    this.onModalOpen.emit(character)
+    this.openModal.emit(character)
   }
 }

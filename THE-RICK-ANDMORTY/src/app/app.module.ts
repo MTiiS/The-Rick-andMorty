@@ -4,8 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { CardModalComponent } from './card-modal/card-modal.component';
-
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
@@ -13,7 +12,7 @@ import { CardModalComponent } from './card-modal/card-modal.component';
     AppComponent,
     CardComponent,
     PaginationComponent,
-    CardModalComponent
+    ModalComponent
   ],
   imports: [
     BrowserModule,

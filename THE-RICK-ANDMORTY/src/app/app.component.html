@@ -1,4 +1,4 @@
-<app-search [searchIsOpen]="searchIsOpen" (onSearch)="onSearch()"></app-search>
+<app-search [searchIsOpen]="searchIsOpen" (onSearch)="onSearch($event)"></app-search>
 <main class="main" [ngClass]="{main_transform:searchIsOpen}">
   <header class="header">
     <h1 class="header__title">

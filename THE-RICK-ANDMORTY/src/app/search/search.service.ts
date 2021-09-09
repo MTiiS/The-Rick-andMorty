@@ -19,14 +19,10 @@ export class SearchService {
     return this.searchRequest;
   }
 
-  createSearchRequest(field: string = "null", value: string = "null") {
-    let form = document.querySelector(".search__form") as HTMLFormElement;
-    const formData = new FormData(form);
+  createSearchRequest(form: FormData) {
+    
+    const formData = form;
     let dataForm: any = {};
-
-    if (field !== "null" && value !== "null") {
-      formData.append(field, value);
-    }
 
     formData.forEach(function (value, key) {
       dataForm[key] = value;

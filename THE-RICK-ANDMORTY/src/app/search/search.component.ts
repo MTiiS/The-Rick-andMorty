@@ -7,11 +7,12 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 })
 export class SearchComponent {
 
-  @Input () searchIsOpen: boolean = false;
-  @Output() onSearch = new EventEmitter();
+  @Input() searchIsOpen: boolean = false;
+  @Output() onSearch = new EventEmitter<FormData>();
 
-   generateRequest(e: any) {
+  generateRequest(e: any) {
     e.preventDefault();
-    this.onSearch.emit();
+    const formData = new FormData(e.target);
+    this.onSearch.emit(formData);
   }
 }

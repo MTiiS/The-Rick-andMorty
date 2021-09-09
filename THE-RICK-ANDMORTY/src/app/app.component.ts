@@ -44,8 +44,8 @@ export class AppComponent {
     this.modalService.addDynamicComponent(character);
   }
 
-  onSearch(params?: any) {
-    this.searchService.createSearchRequest(params?.field, params?.value);
+  onSearch(formData: FormData) {
+    this.searchService.createSearchRequest(formData);
     this.renderCharacters();
   }
 

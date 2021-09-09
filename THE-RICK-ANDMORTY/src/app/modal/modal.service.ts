@@ -18,7 +18,6 @@ export class ModalService {
 
   setRootViewContainerRef(viewContainerRef: any) {
     this.rootViewContainer = viewContainerRef;
-    console.log(this.rootViewContainer);
   }
   async addDynamicComponent(character: Character) {
     character = await this.characterService.setCharacterEpisodeName(character);

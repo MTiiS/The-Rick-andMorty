@@ -11,14 +11,16 @@ export class RickAndMortyService {
   constructor(private http: HttpClient, private paginationService: PaginationService) {
   }
 
-  getCharacters(): Promise<any> {
-    let currentPage = this.paginationService.getCurrentPage();
-
-    let url = "https://rickandmortyapi.com/api/character/?page=" + currentPage;
-    return this.http.get(url).toPromise();
+  getCharacters(currentPage: number, searchRequest: string): Promise<any> {
+    let url = "https://rickandmortyapi.com/api/character/?page=" + currentPage + searchRequest;
+    return this.http.get(url).toPromise().catch(() => {
+      console.log("error");
+    });
   }
 
   getEpisode(url: string) {
-    return this.http.get(url).toPromise();
+    return this.http.get(url).toPromise().catch(() => {
+      console.log("error");
+    });
   }
 }

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ModalComponent } from './modal/modal.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { ModalComponent } from './modal/modal.component';
     AppComponent,
     CardComponent,
     PaginationComponent,
-    ModalComponent
+    ModalComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

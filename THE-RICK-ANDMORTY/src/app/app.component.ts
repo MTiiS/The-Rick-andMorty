@@ -3,6 +3,7 @@ import { CharactersService } from './services/characters.service';
 import { Character } from './services/character.interface';
 import { ModalService } from './modal/modal.service';
 import { SearchService } from './search/search.service';
+import { PaginationService } from './pagination/pagination.service';
 
 
 @Component({
@@ -23,8 +24,9 @@ export class AppComponent {
     private charactersService: CharactersService,
     private viewContainerRef: ViewContainerRef,
     private modalService: ModalService,
-    private searchService: SearchService
-    ) { }
+    private searchService: SearchService,
+    private paginationService: PaginationService
+  ) { }
 
   ngOnInit() {
     this.renderCharacters();
@@ -35,7 +37,9 @@ export class AppComponent {
   }
 
   async renderCharacters() {
-    this.characters = await this.charactersService.refreshCharacters();
+    let currentPage = this.paginationService.getCurrentPage();
+    let searchRequest = this.searchService.getSearchRequest();
+    this.characters = await this.charactersService.refreshCharacters(currentPage, searchRequest);
     this.totalPages = this.charactersService.getTotalPages();
   }
 
@@ -44,12 +48,12 @@ export class AppComponent {
     this.modalService.addDynamicComponent(character);
   }
 
-  onSearch(formData: FormData) {
-    this.searchService.createSearchRequest(formData);
+  onSearch(params: Object) {
+    this.searchService.createSearchRequest(params);
     this.renderCharacters();
   }
 
-  showHideSearch() {
+  toggleSearch() {
     this.searchIsOpen = !this.searchIsOpen;
   }
 }

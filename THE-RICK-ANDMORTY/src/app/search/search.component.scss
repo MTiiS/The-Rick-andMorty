@@ -20,7 +20,7 @@
   width: 265px;
 }
 
-.search__form {
+.form {
   display: grid;
   grid-template-columns: 70px 1fr;
   grid-auto-rows: minmax(min-content, max-content);
@@ -36,7 +36,7 @@
   transform: scale(1.4);
 }
 
-.search__input {
+.form-control{
   display: flex;
   height: 20px;
   border: 1px solid #676464;

@@ -9,9 +9,9 @@ export class SearchService {
 
   constructor(private paginationService: PaginationService) { }
 
-  searchRequest: string = "";
+  searchRequest: object = {};
 
-  setSearchRequest(searchRequest: string) {
+  setSearchRequest(searchRequest: object) {
     this.searchRequest = searchRequest;
   }
 
@@ -19,18 +19,8 @@ export class SearchService {
     return this.searchRequest;
   }
 
-  createSearchRequest(form: FormData) {
-    
-    const formData = form;
-    let dataForm: any = {};
-
-    formData.forEach(function (value, key) {
-      dataForm[key] = value;
-    });
-
-    let request = Object.entries(dataForm).map(([key, val]) => `${key}=${val}`).join('&');
-    request = "&" + request;
-    this.setSearchRequest(request);
+  createSearchRequest(params: object) {
+    this.setSearchRequest(params);
     this.paginationService.setCurrentPage(1);
   }
 }

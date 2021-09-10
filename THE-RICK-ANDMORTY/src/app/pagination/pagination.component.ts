@@ -49,9 +49,9 @@ export class PaginationComponent {
     let firstButtonNumber = currentPage;
 
     if (this.totalPages) {
-
+      
       // if current page < offsetStart rendering always starts from "1" button without offset
-      if (currentPage < offsetStart || currentPage < totalButtons) {
+      if (currentPage < offsetStart || this.totalPages <= totalButtons) {
         firstButtonNumber = 1;
         offsetStep = 0;
       } else if (currentPage >= this.totalPages - offsetStep) {

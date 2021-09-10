@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RickAndMortyService } from './rick-and-morty.service';
-import { Character } from './character.interface'
-import { PaginationService } from '../pagination/pagination.service';
-import { SearchService } from '../search/search.service';
-
+import { Character } from './character.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +9,6 @@ export class CharactersService {
 
   constructor(
     private rickAndMortyService: RickAndMortyService,
-    private paginationService: PaginationService,
-    private searchService: SearchService
     ) {}
 
   private characters: Character[] = [];
@@ -44,13 +39,10 @@ export class CharactersService {
     return this.totalPages;
   }
 
-  async refreshCharacters() {
+  async refreshCharacters(currentPage: number, searchRequest:object) {
     let totalPages: number = 0;
     let characters: Character[] = [];
 
-    let searchRequest = this.searchService.getSearchRequest();
-    let currentPage = this.paginationService.getCurrentPage();
-    
     let apiData: any = await this.rickAndMortyService.getCharacters(currentPage, searchRequest);
     if (apiData && !apiData.error) {
       totalPages = apiData.info.pages;

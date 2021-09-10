@@ -10,18 +10,14 @@ import { Character } from '../services/character.interface';
 export class CardComponent {
   @Input() character?: Character;
   @Output() openModal: EventEmitter<Character> = new EventEmitter<Character>();
-  @Output() onFieldClick: EventEmitter<FormData> = new EventEmitter<FormData>();
+  @Output() onFieldClick: EventEmitter<object> = new EventEmitter<object>();
 
-  linkClick(character: Character) {
+  handleLinkClick(character: Character) {
     this.openModal.emit(character)
   }
 
-  fieldClick(e: MouseEvent, value: string) {
-    let field = ((<HTMLElement>e.target).dataset.id);
-    const formData = new FormData;
-    if (field && value) {
-      formData.append(field, value)
-    }
-    this.onFieldClick.emit(formData);
+  handleFieldClick(e: MouseEvent, value: String) {
+    let field = String(((<HTMLElement>e.target).dataset.id));
+    this.onFieldClick.emit({[field]: value});
   }
 }

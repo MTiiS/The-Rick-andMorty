@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { PaginationService } from '../pagination/pagination.service';
+import { HttpClient, HttpParams } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +7,13 @@ import { PaginationService } from '../pagination/pagination.service';
 
 export class RickAndMortyService {
 
-  constructor(private http: HttpClient, private paginationService: PaginationService) {
+  constructor(private http: HttpClient) {
   }
 
-  getCharacters(currentPage: number, searchRequest: string): Promise<any> {
-    let url = "https://rickandmortyapi.com/api/character/?page=" + currentPage + searchRequest;
-    return this.http.get(url).toPromise().catch(() => {
+  getCharacters(currentPage: number, searchRequest: any): Promise<any> {
+    const options = { params: new HttpParams({ fromObject: searchRequest }).set('page', currentPage) };
+    let url = "https://rickandmortyapi.com/api/character";
+    return this.http.get(url, options).toPromise().catch(() => {
       console.log("error");
     });
   }

@@ -8,11 +8,18 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 export class SearchComponent {
 
   @Input() searchIsOpen: boolean = false;
-  @Output() onSearch = new EventEmitter<FormData>();
+  @Output() onSearch = new EventEmitter<object>();
 
-  generateRequest(e: any) {
+  genders = ['male', 'female', 'genderless', 'unknown'];
+  statuses = ['alive', 'dead', 'unknown'];
+  request = { name: "", gender: "", status: "" };
+
+  sendRequest(e: any) {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    this.onSearch.emit(formData);
+    this.onSearch.emit(this.request);
+  }
+
+  clear() {
+    this.request = { name: "", gender: "", status: "" }
   }
 }

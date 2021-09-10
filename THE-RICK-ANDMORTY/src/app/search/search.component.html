@@ -1,30 +1,22 @@
 <div class="search" [ngClass]="{search_show:searchIsOpen}">
-  <form class="search__form" (submit)="generateRequest($event)" >
-    <label for="name"> Name: </label>
-    <input class="search__input" type="text" name="name">
+  <form class="form" (submit)="sendRequest($event)">
+    <label for="name">Name</label>
+    <input class="form-control" type="text" class="form-control" id="name" 
+           [(ngModel)]="request.name" name="name">
 
-    <label for="gender">Gender:</label>
-    <select class="search__input" name="gender">
-      <option selected="" disabled="">choose gender:</option>
-      <option value="male">male</option>
-      <option value="female">female</option>
-      <option value="genderless">genderless</option>
-      <option value="unknown">unknown</option>
+    <label for="status">Status</label>
+    <select class="form-control" id="status" [(ngModel)]="request.status" name="status">
+      <option *ngFor="let status of statuses" [value]="status">{{status}}</option>
     </select>
 
-    <label for="status">Status:</label>
-    <select class="search__input" name="status">
-      <option selected="" disabled="">choose status:</option>
-      <option value="alive">Alive</option>
-      <option value="dead">Dead</option>
-      <option value="unknown">unknown</option>
+    <label for="status">Gender:</label>
+    <select class="form-control" id="genders" [(ngModel)]="request.gender" name="gender">>
+      <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
     </select>
-
     <div></div>
     <div>
-      <button class="form__button form__clear-button" type="reset">Clear</button>
-      <button class="form__button form__submit-button" type="submit">Search</button>
+      <button class="form__button form__clear-button" (click)="clear()">Clear</button>
+      <button class="form__button form__submit-button">Search</button>
     </div>
   </form>
 </div>
-

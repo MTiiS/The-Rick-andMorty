@@ -12,7 +12,8 @@ export class SearchComponent {
 
   genders = ['male', 'female', 'genderless', 'unknown'];
   statuses = ['alive', 'dead', 'unknown'];
- 
+  reset = { name: '', status: '', gender: '' };
+
   sendRequest(request: any) {
     this.onSearch.emit(request);
   }

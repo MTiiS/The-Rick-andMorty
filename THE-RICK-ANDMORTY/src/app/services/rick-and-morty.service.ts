@@ -21,8 +21,8 @@ export class RickAndMortyService {
 
   getEpisode(url: string) {
     return this.http.get(url)
-    .toPromise().catch( () => {
-      console.log("error");
-    });
+      .toPromise().catch( () => {
+        console.log("error");
+      });
   }
 }

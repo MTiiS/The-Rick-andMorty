@@ -11,15 +11,17 @@ export class RickAndMortyService {
   }
 
   getCharacters(currentPage: number, searchRequest: any): Promise<any> {
-    const options = { params: new HttpParams({ fromObject: searchRequest }).set('page', currentPage) };
+    const params = { params: new HttpParams({ fromObject: { "page": currentPage, ...searchRequest } }) };
     let url = "https://rickandmortyapi.com/api/character";
-    return this.http.get(url, options).toPromise().catch(() => {
-      console.log("error");
-    });
+    return this.http.get(url, params)
+      .toPromise().catch( () => {
+        console.log("error");
+      });
   }
 
   getEpisode(url: string) {
-    return this.http.get(url).toPromise().catch(() => {
+    return this.http.get(url)
+    .toPromise().catch( () => {
       console.log("error");
     });
   }

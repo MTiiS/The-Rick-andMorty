@@ -12,14 +12,8 @@ export class SearchComponent {
 
   genders = ['male', 'female', 'genderless', 'unknown'];
   statuses = ['alive', 'dead', 'unknown'];
-  request = { name: "", gender: "", status: "" };
-
-  sendRequest(e: any) {
-    e.preventDefault();
-    this.onSearch.emit(this.request);
-  }
-
-  clear() {
-    this.request = { name: "", gender: "", status: "" }
+ 
+  sendRequest(request: any) {
+    this.onSearch.emit(request);
   }
 }

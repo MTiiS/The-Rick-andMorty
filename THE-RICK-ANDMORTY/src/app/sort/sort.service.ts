@@ -1,0 +1,15 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SortService {
+
+  sortReverse: boolean = false;
+
+  constructor() { }
+
+  toogleSort() {
+    this.sortReverse = !this.sortReverse;
+  }
+}

@@ -7,6 +7,8 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { ModalComponent } from './modal/modal.component';
 import { SearchComponent } from './search/search.component';
 import { FormsModule } from '@angular/forms';
+import { SortPipe } from './sort/sort.pipe';
+import { SortComponent } from './sort/sort.component'
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { FormsModule } from '@angular/forms';
     CardComponent,
     PaginationComponent,
     ModalComponent,
-    SearchComponent
+    SearchComponent,
+    SortPipe,
+    SortComponent
   ],
   imports: [
     BrowserModule,

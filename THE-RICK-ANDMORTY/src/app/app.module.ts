@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ModalComponent } from './modal/modal.component';
+import { LoadingDirective } from './loading/loading.directive';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import { ModalComponent } from './modal/modal.component';
     AppComponent,
     CardComponent,
     PaginationComponent,
-    ModalComponent
+    ModalComponent,
+    LoadingDirective,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

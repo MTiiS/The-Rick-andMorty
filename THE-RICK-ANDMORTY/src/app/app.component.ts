@@ -2,6 +2,7 @@ import { Component, ViewContainerRef } from '@angular/core';
 import { CharactersService } from './services/characters.service';
 import { Character } from './services/character.interface';
 import { ModalService } from './modal/modal.service';
+import { SortService } from './sort/sort.service';
 
 
 @Component({
@@ -19,7 +20,9 @@ export class AppComponent {
 
   constructor(private charactersService: CharactersService,
     private viewContainerRef: ViewContainerRef,
-    private modalService: ModalService) { }
+    private modalService: ModalService,
+    public sortService: SortService
+    ) { }
 
   ngOnInit() {
     this.renderCharacters();

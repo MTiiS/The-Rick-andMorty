@@ -2,18 +2,19 @@
   <div class="card__content">
     <section>
       <h1 class="card__content-title card__content-title_highlights">{{character.name}}</h1>
-      <p class="card__content-text">
+      <p class="card__content-text" data-id="status" (click)="handleFieldClick($event, character.status)">
         <span class="card__status-mark card__status-mark_{{character.status | lowercase}}">●</span>
         status: {{character.status}}
       </p>
-      <p class="card__content-text">gender: {{character.gender}}</p>
+      <p class="card__content-text" data-id="gender" (click)="handleFieldClick($event, character.gender)">gender:
+        {{character.gender}}</p>
     </section>
     <section>
       <h4 class="card__content-title card__content-title_highlights">Last known location:</h4>
       <p class="card__content-text">{{character.location.name}}</p>
     </section>
     <section class="modal__openButton">
-      <a class="card__link" href="#" (click)="setSelectedCharacter(character)">read more...</a>
+      <a class="card__link" href="#" (click)="handleLinkClick(character)">read more...</a>
     </section>
   </div>
 </div>

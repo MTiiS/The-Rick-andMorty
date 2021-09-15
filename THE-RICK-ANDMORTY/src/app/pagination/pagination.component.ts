@@ -21,7 +21,6 @@ export class PaginationComponent {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes.totalPages?.currentValue)
     if (changes.totalPages?.currentValue) {
       this.refreshDisplayedButtons();
     }
@@ -37,8 +36,7 @@ export class PaginationComponent {
 
   refreshDisplayedButtons() {
     let displayedButtons: Array<PaginationButton> = [];
-    let totalPages = this.totalPages;
-
+   
     // config
     let prevButton = this.configService.getConfig("PREV_BUTTON");
     let nextButton = this.configService.getConfig("NEXT_BUTTON");
@@ -50,20 +48,20 @@ export class PaginationComponent {
     let currentPage = this.paginationService.getCurrentPage();
     let firstButtonNumber = currentPage;
 
-    if (totalPages) {
-
+    if (this.totalPages) {
+      
       // if current page < offsetStart rendering always starts from "1" button without offset
-      if (currentPage < offsetStart) {
+      if (currentPage < offsetStart || this.totalPages <= totalButtons) {
         firstButtonNumber = 1;
         offsetStep = 0;
-      } else if (currentPage >= totalPages - offsetStep) {
-        firstButtonNumber = (totalPages - totalButtons);
+      } else if (currentPage >= this.totalPages - offsetStep) {
+        firstButtonNumber = (this.totalPages - totalButtons);
         offsetStep = 0;
       }
 
       let lastButtonNumber = (firstButtonNumber + totalButtons - offsetStep);
-      if (lastButtonNumber > totalPages) {
-        lastButtonNumber = totalPages;
+      if (lastButtonNumber > this.totalPages) {
+        lastButtonNumber = this.totalPages;
       }
 
       // add page buttons
@@ -76,7 +74,7 @@ export class PaginationComponent {
       let isDisabled = false;
       isDisabled = currentPage === firstPage;
       displayedButtons.unshift( new PaginationButton(prevButton.id, prevButton.content, false, isDisabled) );
-      isDisabled = currentPage === totalPages;
+      isDisabled = currentPage === this.totalPages;
       displayedButtons.push( new PaginationButton(nextButton.id, nextButton.content, false, isDisabled) );
     }
 

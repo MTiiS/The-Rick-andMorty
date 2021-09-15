@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter  } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Character } from '../services/character.interface';
 
 @Component({
@@ -10,10 +10,14 @@ import { Character } from '../services/character.interface';
 export class CardComponent {
   @Input() character?: Character;
   @Output() openModal: EventEmitter<Character> = new EventEmitter<Character>();
+  @Output() onFieldClick: EventEmitter<object> = new EventEmitter<object>();
 
-  constructor() { }
-
-  setSelectedCharacter(character: Character) {
+  handleLinkClick(character: Character) {
     this.openModal.emit(character)
+  }
+
+  handleFieldClick(e: MouseEvent, value: String) {
+    let field = String(((<HTMLElement>e.target).dataset.id));
+    this.onFieldClick.emit({[field]: value});
   }
 }

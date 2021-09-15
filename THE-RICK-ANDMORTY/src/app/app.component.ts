@@ -20,6 +20,7 @@ export class AppComponent {
   modalIsClosed: boolean = true;
   searchIsOpen: boolean = false;
   totalPages: number = 0;
+  isLoading: boolean = true;
 
   constructor(
     private charactersService: CharactersService,
@@ -39,10 +40,12 @@ export class AppComponent {
   }
 
   async renderCharacters() {
+    this.isLoading = true;
     let currentPage = this.paginationService.getCurrentPage();
     let searchRequest = this.searchService.getSearchRequest();
     this.characters = await this.charactersService.refreshCharacters(currentPage, searchRequest);
     this.totalPages = this.charactersService.getTotalPages();
+    this.isLoading = false;
   }
 
   openModal(character: Character) {

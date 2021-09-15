@@ -4,6 +4,7 @@ import { Character } from './services/character.interface';
 import { ModalService } from './modal/modal.service';
 import { SearchService } from './search/search.service';
 import { PaginationService } from './pagination/pagination.service';
+import { SortService } from './sort/sort.service';
 
 
 @Component({
@@ -25,9 +26,10 @@ export class AppComponent {
     private viewContainerRef: ViewContainerRef,
     private modalService: ModalService,
     private searchService: SearchService,
-    private paginationService: PaginationService
+    private paginationService: PaginationService,
+    public sortService: SortService
   ) { }
-
+ 
   ngOnInit() {
     this.renderCharacters();
   }

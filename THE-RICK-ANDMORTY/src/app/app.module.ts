@@ -9,6 +9,8 @@ import { SearchComponent } from './search/search.component';
 import { FormsModule } from '@angular/forms';
 import { SortPipe } from './sort/sort.pipe';
 import { SortComponent } from './sort/sort.component'
+import { LoadingDirective } from './loading/loading.directive';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { SortComponent } from './sort/sort.component'
     ModalComponent,
     SearchComponent,
     SortPipe,
-    SortComponent
+    SortComponent,
+    LoadingDirective,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

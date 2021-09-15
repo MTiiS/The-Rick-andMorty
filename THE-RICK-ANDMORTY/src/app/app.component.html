@@ -1,7 +1,9 @@
 <app-search
   [searchIsOpen]="searchIsOpen"
-  (onSearch)="onSearch($event)"></app-search>
+  (onSearch)="onSearch($event)"
+></app-search>
 <main class="main" [ngClass]="{main_transform:searchIsOpen}">
+  <ng-container *apploading="isLoading"></ng-container>
   <header class="header">
     <h1 class="header__title">
       {{title}}
